@@ -84,7 +84,7 @@ public class Carrito{
 	/**
 	 * 
 	 * @param i
-	 * @return
+	 * @return el producto de la posicion i.
 	 */
 	public Producto getProd(int i) {
 		
