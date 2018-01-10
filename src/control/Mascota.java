@@ -29,6 +29,8 @@ public class Mascota {
 
 	private Date fecha_Nacimiento;
 
+	private Cita[] citas_Mascota;
+	
 	/**
 	 * 
 	 * @param id_Mascota
@@ -52,7 +54,8 @@ public class Mascota {
 				this.setRaza(raza=datos.getString(3));
 				this.setSexo(datos.getString(4));
 				this.setFecha_Nacimiento(datos.getDate(6, null));
-
+				//this.getCitasMascota();
+				
 			}
 
 		} catch (SQLException e) {
@@ -61,6 +64,25 @@ public class Mascota {
 
 	}
 
+	/*private void getCitasMascota() {
+		
+		
+		
+		try {
+			datos=declaracion.executeQuery("Select * from cita where id_Mascota = "+this.getDni_Mascota()+";");
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+*/
 	/**
 	 * 
 	 * @return

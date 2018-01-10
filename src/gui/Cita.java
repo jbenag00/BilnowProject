@@ -16,13 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 
 public class Cita {
 
-	private JFrame frame;
+	private static JFrame frame;
 
 	private static Mascota mascota_Cita=null;
 	
@@ -47,7 +49,9 @@ public class Cita {
 				try {
 					mascota_Cita=mascota;
 					Cita window = new Cita();
-					window.frame.setVisible(true);
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,6 +84,18 @@ public class Cita {
 		frame.getContentPane().add(lblInformacinMascota);
 		
 		JButton btnGuardarCita = new JButton("Guardar Cita");
+		btnGuardarCita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				int fecha = calendario.getCalendar().get(java.util.Calendar.DATE);
+				
+				Date cita_Fecha=new Date(fecha);
+			
+				//System.out.println(cita_Fecha.toString());
+				
+			}
+		});
 		btnGuardarCita.setBounds(611, 545, 121, 23);
 		frame.getContentPane().add(btnGuardarCita);
 		

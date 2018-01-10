@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +23,7 @@ import javax.swing.JPanel;
  */
 public class Administrador {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private JTextField textnom;
 	private JTextField Apellido;
 	private JTextField textDireccion;
@@ -35,8 +38,10 @@ public class Administrador {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Administrador window = new Administrador();
-					window.frame.setVisible(true);
+			
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

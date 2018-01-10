@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 
 import control.Carrito;
 import control.Producto;
@@ -48,6 +49,7 @@ public class Reserva {
 			public void run() {
 				try {
 					frame.setVisible(true);
+					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

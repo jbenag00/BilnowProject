@@ -23,6 +23,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -46,6 +48,8 @@ public class Cliente {
 			public void run() {
 				try {
 					frame.setVisible(true);
+					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
