@@ -178,5 +178,17 @@ public class Mascota {
 	private void setFecha_Nacimiento(Date fecha_Nacimiento) {
 		this.fecha_Nacimiento = fecha_Nacimiento;
 	}
+
+	public void aniadirCita(java.util.Date cita_Fecha) {
+		// TODO Auto-generated method stub
+		
+		try {
+			declaracion.executeUpdate("INSERT INTO `cita` (`id_Cita`, `fecha_cita`, `id_Mascota`) VALUES (NULL, '"+new Date(cita_Fecha.getTime())+"', '"+this.getDni_Mascota()+"');");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

@@ -102,11 +102,10 @@ public class Cita {
 				cita_Fecha.setDate(fecha);
 				cita_Fecha.setHours(Integer.parseInt(hora.substring(0, 2)));
 				cita_Fecha.setMinutes(Integer.parseInt(hora.substring(3,5)));
-				
+							
 				//variables para la consulta prepararlas
 				
-				
-				
+				mascota_Cita.aniadirCita(cita_Fecha);
 				
 				
 			}
