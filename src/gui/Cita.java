@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -40,6 +42,8 @@ public class Cita {
 									  "19:00",
 									  "20:00"};
 
+	private int hora_Seleccionada;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -83,19 +87,31 @@ public class Cita {
 		lblInformacinMascota.setBounds(24, 26, 384, 26);
 		frame.getContentPane().add(lblInformacinMascota);
 		
+		/**
+		 * 
+		 */
 		JButton btnGuardarCita = new JButton("Guardar Cita");
 		btnGuardarCita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				String hora= horarios[hora_Seleccionada];
 				
 				int fecha = calendario.getCalendar().get(java.util.Calendar.DATE);
 				
-				Date cita_Fecha=new Date(fecha);
-			
-				//System.out.println(cita_Fecha.toString());
+				Date cita_Fecha=new Date();
+				cita_Fecha.setDate(fecha);
+				cita_Fecha.setHours(Integer.parseInt(hora.substring(0, 2)));
+				cita_Fecha.setMinutes(Integer.parseInt(hora.substring(3,5)));
+				
+				//variables para la consulta prepararlas
+				
+				
+				
+				
 				
 			}
 		});
+		
 		btnGuardarCita.setBounds(611, 545, 121, 23);
 		frame.getContentPane().add(btnGuardarCita);
 		
@@ -122,6 +138,23 @@ public class Cita {
 			JLabel lblNewLabel_1 = new JLabel(horarios[i]);
 			lblNewLabel_1.setBounds(27, 11, 46, 14);
 			panel_1.add(lblNewLabel_1);
+			
+			panel_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+
+					int pos=panel_1.getY();
+
+					if(pos!=0) {
+						hora_Seleccionada=pos/31;
+					}
+					else {
+						hora_Seleccionada=0;
+					}
+					
+				}
+				
+			});
 			
 			//control
 			if(horarios[i]=="13:00") {
