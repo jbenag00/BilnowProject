@@ -80,7 +80,7 @@ public class Cliente {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Cita nueva=new Cita();
-				nueva.main(cliente.getMascota(0));	
+				nueva.main(cliente.getMascota(0),null);	
 			}
 		});
 		btnPedirCita.setBounds(659, 459, 134, 39);
@@ -144,9 +144,10 @@ public class Cliente {
 				
 			}
 		});
+		
 		btnReserve.setBounds(571, 43, 209, 55);
 		frame.getContentPane().add(btnReserve);
-		
+				
 		pos=0;
 		
 		for(int i=0;i<cliente.getNumMascotas()+1;i++) {
@@ -183,9 +184,22 @@ public class Cliente {
 			
 			nom_Mascota.setText(actual.getDni_Mascota());
 			
+			if(actual.getNumCitas()>0) {
+				JButton btnVercitas = new JButton("Ver cita");
+				btnVercitas.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						gui.Mascota ventana_Mascota = new gui.Mascota(actual);
+						ventana_Mascota.main(actual);
+						
+					}
+				});
+				btnVercitas.setBounds(633, 7, 89, 23);
+				panel_Mascota.add(btnVercitas);
+			}
+				
 			pos=pos+41;
 		}
 		
 	}
-	
 }

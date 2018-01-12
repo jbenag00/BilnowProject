@@ -33,7 +33,7 @@ public class Producto {
 
 	private Date fecha_Cad;
 
-	private List<Producto> productos=null;
+	private List<Producto> productos_Almacen=null;
 
 
 	/**
@@ -129,10 +129,10 @@ public class Producto {
 	 */
 	public Producto[] getProductos(){
 
-		productos=new ArrayList<Producto>();
+		productos_Almacen=new ArrayList<>();
 
 		try {
-			int cont=0;
+		
 			datos=declaracion.executeQuery("SELECT * FROM `productos`;");
 
 			while(datos.next()){
@@ -145,13 +145,13 @@ public class Producto {
 				n_Producto.setFabrica_Prod(datos.getString(4));
 				n_Producto.setPrecio(datos.getInt(5));
 				
-				productos.add(n_Producto);
-				productos.add(n_Producto);
-				productos.add(n_Producto);
-				productos.add(n_Producto);
-				productos.add(n_Producto);
-				productos.add(n_Producto);
-				productos.add(n_Producto);
+				productos_Almacen.add(n_Producto);
+				productos_Almacen.add(n_Producto);
+				productos_Almacen.add(n_Producto);
+				productos_Almacen.add(n_Producto);
+				productos_Almacen.add(n_Producto);
+				productos_Almacen.add(n_Producto);
+				productos_Almacen.add(n_Producto);
 
 			}
 
@@ -161,7 +161,7 @@ public class Producto {
 			
 		}
 		
-		return productos.toArray(new Producto[getNumProductos()]);
+		return productos_Almacen.toArray(new Producto[getNumProductos()]);
 
 	}
 	
@@ -208,11 +208,11 @@ public class Producto {
 		
 		Producto devolver=null;
 		
-		for(int i=0;i<productos.size();i++) {
+		for(int i=0;i<productos_Almacen.size();i++) {
 				
-			if(productos.get(i).getId_Prod()==id) {
+			if(productos_Almacen.get(i).getId_Prod()==id) {
 				
-				devolver=productos.get(i);
+				devolver=productos_Almacen.get(i);
 			
 			}
 			

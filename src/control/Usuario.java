@@ -22,10 +22,14 @@ public class Usuario {
 
 	private String nombre_usuario;
 
-	private String direccion_usuario;
+	private String tlf_Usuario;
+	
+	private String dir_usuario;
 
 	private String email_usuario;
 
+	
+	//cambiar esto por un Arraylist<Mascota> hay que cambiar la forma de obtencion de los datos.
 	private Mascota[] mascotas_Usuario;
 
 	/**
@@ -107,7 +111,7 @@ public class Usuario {
 	 * @return
 	 */
 	public String getDireccion_usuario() {
-		return direccion_usuario;
+		return dir_usuario;
 	}
 
 	/**
@@ -115,7 +119,7 @@ public class Usuario {
 	 * @param direccion_usuario
 	 */
 	private void setDireccion_usuario(String direccion_usuario) {
-		this.direccion_usuario = direccion_usuario;
+		this.dir_usuario = direccion_usuario;
 	}
 
 	/**
@@ -176,9 +180,9 @@ public class Usuario {
 	 * @param j
 	 * @return
 	 */
-	public Mascota getMascota(int j) {
+	public Mascota getMascota(int pos_Mascota) {
 
-		return mascotas_Usuario[j];
+		return mascotas_Usuario[pos_Mascota];
 
 	}
 

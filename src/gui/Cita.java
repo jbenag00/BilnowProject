@@ -44,16 +44,24 @@ public class Cita {
 
 	private int hora_Seleccionada;
 	
+	public static JButton btnEditarCita=null;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(Mascota mascota) {
+	public static void main(Mascota mascota, JButton boton_editar) {
+		
+		if(boton_editar!=null) {
+			btnEditarCita=boton_editar;
+		}
+		
 		EventQueue.invokeLater(new Runnable() {
+			
+
 			public void run() {
 				try {
 					mascota_Cita=mascota;
 					Cita window = new Cita();
-					frame.setVisible(true);
+					frame.setVisible(true);			
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
 				} catch (Exception e) {
@@ -73,7 +81,7 @@ public class Cita {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 928, 645);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,7 +119,8 @@ public class Cita {
 			}
 		});
 		
-		btnGuardarCita.setBounds(611, 545, 121, 23);
+		
+		btnGuardarCita.setBounds(740, 529, 121, 23);
 		frame.getContentPane().add(btnGuardarCita);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -125,6 +134,19 @@ public class Cita {
 		
 		panel__Horas.setPreferredSize(new Dimension(418,horarios.length*31));
 		panel__Horas.setLayout(null);
+		
+		if(btnEditarCita!=null){
+			btnEditarCita.setBounds(499, 529, 153, 26);
+			frame.getContentPane().add(btnEditarCita);
+			btnEditarCita.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					
+				
+				}
+			});
+			
+		}
 		
 		int pos_Lab=0;
 		boolean hora_Libre=true;
