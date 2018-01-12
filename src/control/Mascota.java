@@ -24,19 +24,21 @@ public class Mascota {
 
 	private String raza;
 
-	private String sexo;
+	private int sexo;
 
 	private String capa;
 
 	private Date fecha_Nacimiento;
-
+	
 	private Cita[] citas_Mascota;
+	
+	private String nombre;
 
 	/**
 	 * 
 	 * @param id_Mascota
 	 */
-	public Mascota(String id_Mascota){
+	public Mascota(){
 
 		try {
 
@@ -45,19 +47,6 @@ public class Mascota {
 			Connection nueva= conexion.getConexion();
 
 			declaracion=nueva.createStatement();
-
-			datos=declaracion.executeQuery("SELECT * FROM mascota where id_Mascota='"+id_Mascota+"';");
-
-			while(datos.next()) {
-
-				this.setDni_Mascota(datos.getString(1));
-				this.setEspecie(especie=datos.getString(2));
-				this.setRaza(raza=datos.getString(3));
-				this.setSexo(datos.getString(4));
-				this.setFecha_Nacimiento(datos.getDate(6, null));
-				//this.getCitasMascota();
-
-			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -117,16 +106,16 @@ public class Mascota {
 	 * 
 	 * @return
 	 */
-	public String getSexo() {
+	public int getSexo() {
 		return sexo;
 	}
 
 	/**
 	 * 
-	 * @param sexo
+	 * @param i
 	 */
-	private void setSexo(String sexo) {
-		this.sexo = sexo;
+	private void setSexo(int i) {
+		this.sexo = i;
 	}
 
 	/**
@@ -190,6 +179,10 @@ public class Mascota {
 		this.fecha_Nacimiento = fecha_Nacimiento;
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	public void aniadirCita(java.util.Date cita_Fecha) {
 		// TODO Auto-generated method stub
 
@@ -202,6 +195,9 @@ public class Mascota {
 
 	}
 
+	/**
+	 * 
+	 */
 	public int getNumCitas() {
 		// TODO Auto-generated method stub
 
@@ -227,6 +223,10 @@ public class Mascota {
 
 	}
 
+	/*
+	 * 
+	 * 
+	 */
 	public void eliminarCita(int id_Cita) {
 		// TODO Auto-generated method stub
 		
@@ -238,6 +238,50 @@ public class Mascota {
 		}
 		
 		gui.Mascota.frame.repaint();
+	}
+
+	/**
+	 * 
+	 * 
+	 */
+	public Mascota[] getMascotasUsuario(Usuario dueño) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Mascota> mascotas=new ArrayList<>();
+		
+		try {
+			datos=declaracion.executeQuery("select * from mascota where id_Dueño='"+dueño.getDni_usuario()+"'");
+			
+			while(datos.next()) {
+
+				Mascota nueva=new Mascota();
+				
+				nueva.setDni_Mascota(datos.getString(1));
+				nueva.setNombre(datos.getString(2));
+				nueva.setEspecie(datos.getString(3));
+				nueva.setRaza(datos.getString(4));
+				nueva.setCapa(datos.getString(5));
+				nueva.setFecha_Nacimiento(datos.getDate(6));
+				nueva.setSexo(datos.getInt(7));
+				
+				mascotas.add(nueva);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return mascotas.toArray(new Mascota[dueño.getNumMascotas()]);
+	}
+
+	private void setNombre(String nom) {
+		// TODO Auto-generated method stub
+		
+		this.nombre=nom;
+		
 	}
 
 }

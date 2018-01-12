@@ -27,10 +27,13 @@ public class Usuario {
 	private String dir_usuario;
 
 	private String email_usuario;
-
 	
+	private int rol_usuario;
+		
 	//cambiar esto por un Arraylist<Mascota> hay que cambiar la forma de obtencion de los datos.
 	private Mascota[] mascotas_Usuario;
+	
+	private Mascota mascota_Control;
 
 	/**
 	 * 
@@ -41,7 +44,7 @@ public class Usuario {
 
 		Conecta conexion=new Conecta();
 		Connection nueva=conexion.getConexion();
-
+		mascota_Control=new Mascota();
 
 		try {
 			declaracion=nueva.createStatement();
@@ -51,20 +54,15 @@ public class Usuario {
 
 				this.setDni_usuario(datos.getString(1));
 				this.setNombre_usuario(datos.getString(2).concat(" "+datos.getString(3)));
-				this.setDireccion_usuario(datos.getString(4));
+				this.settlf_Usuario(datos.getString(4));
+				this.setDireccion_usuario(datos.getString(5));
+				this.setRol(datos.getInt(6));
 				this.setEmail_usuario(datos.getString(8));
 
 			}
 
 			mascotas_Usuario=new Mascota[this.getNumMascotas()];
-
-			datos=declaracion.executeQuery("SELECT * FROM mascota where id_Dueño='"+usuario+"';");
-
-			if(datos.next()) {
-
-				this.setMascotas_Usuario(new Mascota(datos.getString(1)));
-
-			}
+			mascotas_Usuario=mascota_Control.getMascotasUsuario(this);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -73,6 +71,20 @@ public class Usuario {
 
 	}
 	
+	private void setRol(int rol) {
+		// TODO Auto-generated method stub
+	
+		this.rol_usuario=rol;
+		
+	}
+
+	private void settlf_Usuario(String tlf) {
+		// TODO Auto-generated method stub
+		
+		this.tlf_Usuario=tlf;
+		
+	}
+
 	/**
 	 * 
 	 * @return
