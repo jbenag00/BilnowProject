@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 public class Reserva {
 
@@ -20,8 +21,12 @@ public class Reserva {
 	private boolean recogido;
 
 
-
-	public Reserva(String id_Usuarios, Producto[] lista_Productos){
+	/**
+	 * 
+	 * @param id_Usuarios
+	 * @param lista_Productos
+	 */
+	public Reserva(String id_Usuarios, Date fecha, Producto[] lista_Productos){
 
 		Conecta conectar = new Conecta();
 
@@ -31,6 +36,8 @@ public class Reserva {
 
 			declaracion = conexion.createStatement();
 
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +48,12 @@ public class Reserva {
 	}
 
 
-
+	
+	/**
+	 * 
+	 * @param lista_Productos
+	 */
+	
 	private void aniadir_Productos(Producto[] lista_Productos) {
 		// TODO Auto-generated method stub
 

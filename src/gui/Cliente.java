@@ -150,9 +150,11 @@ public class Cliente {
 				
 		pos=0;
 		
-		for(int i=0;i<cliente.getNumMascotas()+1;i++) {
+		for(int i=0;i<cliente.getNumMascotas();i++) {
 			
-			Mascota actual=cliente.getMascota(0);			
+			Mascota actual=cliente.getMascota(i);	
+			
+			control.Cita control_Cita=new control.Cita(actual.getDni_Mascota());
 			JPanel panel_Mascota = new JPanel();
 			panel_Mascota.setForeground(Color.YELLOW);
 			panel_Mascota.setBounds(0, pos, 751, 41);
@@ -184,7 +186,7 @@ public class Cliente {
 			
 			nom_Mascota.setText(actual.getDni_Mascota());
 			
-			if(actual.getNumCitas()>0) {
+			if(control_Cita.getNumCitas()>0) {
 				JButton btnVercitas = new JButton("Ver cita");
 				btnVercitas.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

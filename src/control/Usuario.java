@@ -61,7 +61,7 @@ public class Usuario {
 
 			}
 
-			mascotas_Usuario=new Mascota[this.getNumMascotas()];
+			mascotas_Usuario=new Mascota[mascota_Control.getNumMascotas(this.getDni_usuario())];
 			mascotas_Usuario=mascota_Control.getMascotasUsuario(this);
 
 		} catch (SQLException e) {
@@ -163,28 +163,6 @@ public class Usuario {
 
 		}
 
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getNumMascotas() {
-
-		int num_Mascotas=0;
-
-		try {
-			datos=declaracion.executeQuery("select count(*) from mascota where id_Dueño='"+dni_usuario+"';");
-			if(datos.next()) {
-				num_Mascotas=datos.getInt(1);
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return num_Mascotas;
 	}
 
 	/**

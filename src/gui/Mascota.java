@@ -26,6 +26,8 @@ public class Mascota {
 	
 	private control.Mascota mascota_seleccionada;
 	
+	private control.Cita control_Cita;
+	
 	private int cita_Seleccionada;
 
 	/**
@@ -53,7 +55,7 @@ public class Mascota {
 	public Mascota(control.Mascota actual) {
 		
 		this.mascota_seleccionada=actual;
-		
+		control_Cita=new control.Cita(actual.getDni_Mascota());
 		initialize();
 	}
 
@@ -82,21 +84,21 @@ public class Mascota {
 		JButton btnEditarCita = new JButton("Editar Cita");
 		btnEditarCita.setBounds(280, 595, 124, 42);
 		
-		panel.setPreferredSize(new Dimension(426, 43*mascota_seleccionada.getNumCitas()));
+		panel.setPreferredSize(new Dimension(426, 43*control_Cita.getNumCitas()));
 		
-		mascota_seleccionada.getCitasMascota();
+		control_Cita.getCitasMascota();
 
 		int pos=0;
 		
-		for(int i=0;i< mascota_seleccionada.getNumCitas();i++) {
+		for(int i=0;i< control_Cita.getNumCitas();i++) {
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBounds(0, pos, 426, 43);
 			panel.add(panel_1);
 			panel_1.setLayout(null);
 			
-			JLabel label_Fecha = new JLabel(mascota_seleccionada.getCita(i));
-			label_Fecha.setBounds(50, 11, 46, 14);
+			JLabel label_Fecha = new JLabel(control_Cita.getCita(i));
+			label_Fecha.setBounds(50, 11, 300, 14);
 			panel_1.add(label_Fecha);
 			
 			panel_1.addMouseListener(new MouseAdapter() {
@@ -129,7 +131,9 @@ public class Mascota {
 		btnBorrarCita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-				mascota_seleccionada.eliminarCita(cita_Seleccionada);
+				control_Cita.eliminarCita(cita_Seleccionada);
+				
+				frame.repaint();
 									
 			}
 		});

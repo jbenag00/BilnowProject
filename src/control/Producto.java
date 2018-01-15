@@ -221,4 +221,12 @@ public class Producto {
 		return devolver;
 	}
 
+	public void aniadir_Producto(Producto new_Producto) {
+		
+	}
+	
+	public void borrar_Producto(String id_Producto) {
+		
+	}
+	
 }

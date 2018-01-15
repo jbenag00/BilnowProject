@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,11 +21,11 @@ public class Cita {
 
 	private ResultSet datos;
 
-	private int id_Cita=0;
+	private long id_Cita=0;
 
 	private String id_Mascota=null;
 
-	private Date fecha_Cita=null;
+	private String fecha_Cita;
 	
 	private ArrayList<Cita> citas_Mascota=null;
 
@@ -52,20 +53,23 @@ public class Cita {
 
 	}
 
+	
+	
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public int getId_Cita() {
+	public long getId_Cita() {
 		return id_Cita;
 	}
 
 	/**
 	 * 
-	 * @param id_Cita
+	 * @param l
 	 */
-	public void setId_Cita(int id_Cita) {
-		this.id_Cita = id_Cita;
+	private void setId_Cita(long l) {
+		this.id_Cita = l;
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class Cita {
 	 * 
 	 * @param id_Mascota
 	 */
-	public void setId_Mascota(String id_Mascota) {
+	private void setId_Mascota(String id_Mascota) {
 		this.id_Mascota = id_Mascota;
 	}
 
@@ -88,16 +92,16 @@ public class Cita {
 	 * 
 	 * @return
 	 */
-	public Date getFecha_Cita() {
+	public String getFecha_Cita() {
 		return fecha_Cita;
 	}
 
 	/**
 	 * 
-	 * @param fecha_Cita
+	 * @param date
 	 */
-	public void setFecha_Cita(Date fecha_Cita) {
-		this.fecha_Cita = fecha_Cita;
+	private void setFecha_Cita(String fecha) {
+		this.fecha_Cita = fecha;
 	}
 	/**
 	 * 
@@ -105,12 +109,102 @@ public class Cita {
 	 * @return 
 	 */
 
-	public Cita getCita(int pos_Cita) {
+	public String getCita(int pos_Cita) {
 		// TODO Auto-generated method stub
 		
-		return this.citas_Mascota.get(pos_Cita);
+		return String.valueOf(citas_Mascota.get(pos_Cita).getFecha_Cita());
 		
 	}
+	
+	/**
+	 * 
+	 * 
+	 */
+	public void aniadirCita(java.util.Date cita_Fecha) {
+		// TODO Auto-generated method stub
+
+		try {
+			declaracion.executeUpdate("INSERT INTO `cita` (`id_Cita`, `fecha_cita`, `id_Mascota`) VALUES (NULL, '"+new java.sql.Date(cita_Fecha.getTime())+"', '"+this.getId_Mascota()+"');");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();  
+		}
+
+	}
+
+	/*
+	 * 
+	 * 
+	 */
+	public void eliminarCita(int pos_Cita) {
+		// TODO Auto-generated method stub
+		
+		try {
+			declaracion.execute("DELETE FROM `cita` WHERE`id_Cita` = '"+citas_Mascota.get(pos_Cita).getId_Cita()+"';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	/**
+	 * @param string 
+	 * 
+	 */
+	public void getCitasMascota() {
+
+		citas_Mascota= new ArrayList<Cita>();
+
+			try {
+	
+				datos=declaracion.executeQuery("SELECT * FROM `cita` WHERE `id_Mascota` = '"+this.getId_Mascota()+"'");
+				
+				while (datos.next()) {
+
+					Cita cita_nueva=new Cita(this.getId_Mascota());
+					cita_nueva.setId_Cita(datos.getLong(1));
+					System.out.println(datos.getString(2));
+					cita_nueva.setFecha_Cita(datos.getString(2));
+					cita_nueva.setId_Mascota(datos.getString(3));
+
+
+					citas_Mascota.add(cita_nueva);
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+
+	}
+	
+	/**
+	 * 
+	 */
+	public int getNumCitas() {
+		// TODO Auto-generated method stub
+
+		int num_Citas=0;
+
+		try {
+			datos=declaracion.executeQuery("SELECT count(*) from cita where id_Mascota ='"+this.getId_Mascota()+"';");
+
+			if(datos.next()) {
+				num_Citas=datos.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return num_Citas;
+		
+	}
+
+	
 
 	
 }

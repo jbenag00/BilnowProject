@@ -45,6 +45,9 @@ public class Cita {
 	private int hora_Seleccionada;
 	
 	public static JButton btnEditarCita=null;
+	
+	private control.Cita control_cita=null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +63,7 @@ public class Cita {
 			public void run() {
 				try {
 					mascota_Cita=mascota;
+					
 					Cita window = new Cita();
 					frame.setVisible(true);			
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -82,6 +86,7 @@ public class Cita {
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 928, 645);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,6 +107,8 @@ public class Cita {
 		btnGuardarCita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				control_cita=new control.Cita(mascota_Cita.getDni_Mascota());
+				
 				String hora= horarios[hora_Seleccionada];
 				
 				int fecha = calendario.getCalendar().get(java.util.Calendar.DATE);
@@ -113,9 +120,8 @@ public class Cita {
 							
 				//variables para la consulta prepararlas
 				
-				mascota_Cita.aniadirCita(cita_Fecha);
-				
-				
+				control_cita.aniadirCita(cita_Fecha);
+					
 			}
 		});
 		
