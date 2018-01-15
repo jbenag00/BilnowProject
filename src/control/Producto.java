@@ -16,10 +16,8 @@ import java.util.List;
  *
  */
 public class Producto {
-
-	public static ResultSet datos;
-
-	public static Statement declaracion;
+	
+	private ResultSet datos;
 
 	public static int pos=0;
 
@@ -34,6 +32,8 @@ public class Producto {
 	private Date fecha_Cad;
 
 	private List<Producto> productos_Almacen=null;
+	
+	private AccesoBD declaracionBD=new AccesoBD();
 
 
 	/**
@@ -133,7 +133,7 @@ public class Producto {
 
 		try {
 		
-			datos=declaracion.executeQuery("SELECT * FROM `productos`;");
+			datos=declaracionBD.getProductosBD();
 
 			while(datos.next()){
 
@@ -170,18 +170,13 @@ public class Producto {
 	 * @return
 	 */
 	public int getNumProductos() {
-
+		
 		int num_Productos=0;
-
-		Conecta nuevo=new Conecta();
-
-		Connection conexion=nuevo.getConexion();
 
 		try {
 
-			declaracion=conexion.createStatement();
 
-			datos=declaracion.executeQuery("SELECT count(*) from productos");
+			datos=declaracionBD.getNumProductosBD();
 
 			if(datos.next()) {
 
@@ -198,6 +193,7 @@ public class Producto {
 		return num_Productos;
 	}
 
+	
 	
 	/**
 	 * 

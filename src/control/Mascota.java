@@ -157,13 +157,13 @@ public class Mascota {
 		this.fecha_Nacimiento = fecha_Nacimiento;
 	}
 
-	public Mascota[] getMascotasUsuario(Usuario dueño) {
+	public Mascota[] getMascotasUsuario(Usuario duenio) {
 		// TODO Auto-generated method stub
 		
 		ArrayList<Mascota> mascotas=new ArrayList<>();
 		
 		try {
-			datos=declaracion.executeQuery("select * from mascota where id_Dueño='"+dueño.getDni_usuario()+"'");
+			datos=declaracion.executeQuery("select * from mascota where id_Duenio='"+duenio.getDni_usuario()+"'");
 			
 			while(datos.next()) {
 
@@ -187,7 +187,7 @@ public class Mascota {
 			e.printStackTrace();
 		}
 		
-		return mascotas.toArray(new Mascota[this.getNumMascotas(dueño.getDni_usuario())]);
+		return mascotas.toArray(new Mascota[this.getNumMascotas(duenio.getDni_usuario())]);
 	}
 	
 	/**
@@ -200,7 +200,7 @@ public class Mascota {
 		int num_Mascotas=0;
 
 		try {
-			datos=declaracion.executeQuery("select count(*) from mascota where id_Dueño='"+dni_usuario+"';");
+			datos=declaracion.executeQuery("select count(*) from mascota where id_Duenio='"+dni_usuario+"';");
 			if(datos.next()) {
 				num_Mascotas=datos.getInt(1);
 			}

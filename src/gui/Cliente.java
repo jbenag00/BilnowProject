@@ -37,6 +37,7 @@ public class Cliente {
 	private JTextField textNombre;
 	private JTextField textCorreo;
 	private Usuario cliente;
+	private Mascota mascota_Control;
 	public int pos_Mascota;
 	public int pos;
 
@@ -70,6 +71,8 @@ public class Cliente {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		mascota_Control=new Mascota();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 830, 562);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -150,7 +153,7 @@ public class Cliente {
 				
 		pos=0;
 		
-		for(int i=0;i<cliente.getNumMascotas();i++) {
+		for(int i=0;i<mascota_Control.getNumMascotas(cliente.getDni_usuario());i++) {
 			
 			Mascota actual=cliente.getMascota(i);	
 			

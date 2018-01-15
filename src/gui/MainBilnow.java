@@ -28,9 +28,6 @@ public class MainBilnow extends JFrame {
 	private JTextField campo_Password;
 	public Connection connection=null;
 	public static java.sql.Statement command;	
-	private static String url="jdbc:mysql://localhost:3306/bilnow_db";	
-	private static String usuario="root";	
-	private static String passwd="";
 	private static ResultSet datos;
 	
 
