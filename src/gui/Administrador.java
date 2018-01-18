@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
+
+import control.AccesoBD;
+
 import javax.swing.JPanel;
 
 /**
@@ -51,6 +54,7 @@ public class Administrador {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public Administrador() {
 		initialize();
@@ -201,5 +205,21 @@ public class Administrador {
 			}
 		});
 		mnInicio.add(mntmAadirProducto);
+		
+		JMenu mnOpcionesAdmin = new JMenu("Opciones Admin");
+		menuBar.add(mnOpcionesAdmin);
+		
+		JMenuItem mntmBackup = new JMenuItem("Backup");
+		mntmBackup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				AccesoBD consulta=new AccesoBD();
+				
+				consulta.backup();
+				
+				
+			}
+		});
+		mnOpcionesAdmin.add(mntmBackup);
 	}
 }

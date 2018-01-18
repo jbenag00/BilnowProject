@@ -1,5 +1,7 @@
 package control;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -323,5 +325,29 @@ public class AccesoBD {
 		}
 		
 	}
+
+
+	public static void backup() {
+		   try {
+		      Process p = Runtime
+		            .getRuntime()
+		            .exec("D:/ProgramasHDD/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump -u root -ppassword database");
+
+		      InputStream is = p.getInputStream();
+		      FileOutputStream fos = new FileOutputStream("backup_pruebas.sql");
+		      byte[] buffer = new byte[1000];
+
+		      int leido = is.read(buffer);
+		      while (leido > 0) {
+		         fos.write(buffer, 0, leido);
+		         leido = is.read(buffer);
+		      }
+
+		      fos.close();
+
+		   } catch (Exception e) {
+		      e.printStackTrace();
+		   }
+		}
 
 }
