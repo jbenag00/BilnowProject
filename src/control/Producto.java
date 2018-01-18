@@ -33,7 +33,7 @@ public class Producto {
 
 	private List<Producto> productos_Almacen=null;
 	
-	private AccesoBD declaracionBD=new AccesoBD();
+	private AccesoBD consulta;
 
 
 	/**
@@ -41,6 +41,8 @@ public class Producto {
 	 */
 	public Producto() {
 
+		consulta=new AccesoBD();
+		
 	}
 	
 	/**
@@ -133,7 +135,7 @@ public class Producto {
 
 		try {
 		
-			datos=declaracionBD.getProductosBD();
+			datos=consulta.getProductosBD();
 
 			while(datos.next()){
 
@@ -176,7 +178,7 @@ public class Producto {
 		try {
 
 
-			datos=declaracionBD.getNumProductosBD();
+			datos=consulta.getNumProductosBD();
 
 			if(datos.next()) {
 

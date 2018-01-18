@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-	public static java.sql.Statement declaracion;
-
 	private ResultSet datos;
 
 	private static String dni_usuario;
@@ -34,6 +32,8 @@ public class Usuario {
 	private Mascota[] mascotas_Usuario;
 	
 	private Mascota mascota_Control;
+	
+	private AccesoBD consulta;
 
 	/**
 	 * 
@@ -41,14 +41,15 @@ public class Usuario {
 	 * @param password
 	 */
 	public Usuario(String usuario, String password) {
+		
+		consulta=new AccesoBD();
 
 		Conecta conexion=new Conecta();
 		Connection nueva=conexion.getConexion();
 		mascota_Control=new Mascota();
 
 		try {
-			declaracion=nueva.createStatement();
-			datos=declaracion.executeQuery("SELECT * FROM usuario where id_Usuario='"+usuario+"';");
+			datos=consulta.getUsuaioBD(usuario);
 			int i=0;
 			if(datos.next()) {
 
@@ -152,21 +153,6 @@ public class Usuario {
 
 	/**
 	 * 
-	 * @param mascota_Usuario
-	 */
-	private void setMascotas_Usuario(Mascota mascota_Usuario) {
-
-		for(int i=0;i<mascotas_Usuario.length;i++){
-			if(mascotas_Usuario[i]==null) {
-				mascotas_Usuario[i]=mascota_Usuario;
-			}
-
-		}
-
-	}
-
-	/**
-	 * 
 	 * @param j
 	 * @return
 	 */
@@ -176,4 +162,26 @@ public class Usuario {
 
 	}
 
+	/**
+	 * 
+	 * @param nuevo_usuario
+	 */
+	public void aniadir_Usuario() {
+		
+		consulta.aniadir_UsuarioBD(this); 
+		
+	}
+	
+	/**
+	 * 
+	 * @param id_Usuario
+	 */
+	public void eliminar_Usuario(String id_Usuario) {
+		
+		consulta.eliminar_UsuarioBD(this.getDni_usuario());
+		
+	}
+
+
+	
 }

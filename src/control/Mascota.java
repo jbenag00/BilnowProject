@@ -14,11 +14,12 @@ import java.util.ArrayList;
 
 public class Mascota {
 
-	public static java.sql.Statement declaracion;
 
 	public ResultSet datos;
 
 	private String dni_Mascota;
+	
+	private String nombre;
 
 	private String especie;
 
@@ -30,9 +31,7 @@ public class Mascota {
 
 	private Date fecha_Nacimiento;
 	
-	private Cita[] citas_Mascota;
-	
-	private String nombre;
+	private AccesoBD declaracion;
 
 	/**
 	 * 
@@ -40,18 +39,8 @@ public class Mascota {
 	 */
 	public Mascota(){
 
-		try {
-
-			Conecta conexion=new Conecta();
-
-			Connection nueva= conexion.getConexion();
-
-			declaracion=nueva.createStatement();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		declaracion=new AccesoBD();
+		
 	}
 
 	/**
@@ -70,11 +59,19 @@ public class Mascota {
 		this.dni_Mascota = dni_Mascota;
 	}
 
+	/**
+	 * 
+	 * @param nom
+	 */
 	private void setNombre(String nom) {
 		// TODO Auto-generated method stub
 		
 		this.nombre=nom;
 		
+	}
+	
+	public String getNombre() {
+		return this.nombre;
 	}
 
 	/**
@@ -163,7 +160,7 @@ public class Mascota {
 		ArrayList<Mascota> mascotas=new ArrayList<>();
 		
 		try {
-			datos=declaracion.executeQuery("select * from mascota where id_Duenio='"+duenio.getDni_usuario()+"'");
+			datos=declaracion.getMascotasUsuarioBD(duenio.getDni_usuario());
 			
 			while(datos.next()) {
 
@@ -200,7 +197,7 @@ public class Mascota {
 		int num_Mascotas=0;
 
 		try {
-			datos=declaracion.executeQuery("select count(*) from mascota where id_Duenio='"+dni_usuario+"';");
+			datos=declaracion.getNumMascotasBD(dni_usuario);
 			if(datos.next()) {
 				num_Mascotas=datos.getInt(1);
 			}

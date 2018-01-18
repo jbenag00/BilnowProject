@@ -15,10 +15,6 @@ import java.util.Date;
  */
 public class Cita {
 
-	private Connection conexion;
-
-	private Statement declaracion;
-
 	private ResultSet datos;
 
 	private long id_Cita=0;
@@ -28,6 +24,8 @@ public class Cita {
 	private String fecha_Cita;
 	
 	private ArrayList<Cita> citas_Mascota=null;
+	
+	private AccesoBD consulta;
 
 	/**
 	 * @param id_Mascota 
@@ -35,26 +33,11 @@ public class Cita {
 	 */
 	public Cita(String id_Mascota) {
 
-		this.setId_Mascota(id_Mascota);
+		this.setId_Mascota(id_Mascota);	
 
-		Conecta conectar = new Conecta();
-
-		conexion = conectar.getConexion();
-
-		try {
-
-			declaracion = conexion.createStatement();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		consulta=new AccesoBD();
 		
-
 	}
-
-	
-	
 	
 	/**
 	 * 
@@ -123,12 +106,7 @@ public class Cita {
 	public void aniadirCita(java.util.Date cita_Fecha) {
 		// TODO Auto-generated method stub
 
-		try {
-			declaracion.executeUpdate("INSERT INTO `cita` (`id_Cita`, `fecha_cita`, `id_Mascota`) VALUES (NULL, '"+new java.sql.Date(cita_Fecha.getTime())+"', '"+this.getId_Mascota()+"');");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();  
-		}
+		consulta.aniadirCitaBD(cita_Fecha, this.getId_Mascota());
 
 	}
 
@@ -139,13 +117,7 @@ public class Cita {
 	public void eliminarCita(int pos_Cita) {
 		// TODO Auto-generated method stub
 		
-		try {
-			declaracion.execute("DELETE FROM `cita` WHERE`id_Cita` = '"+citas_Mascota.get(pos_Cita).getId_Cita()+"';");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		consulta.eliminarCitaBD(citas_Mascota.get(pos_Cita).getId_Cita());
 		
 	}
 	
@@ -159,7 +131,7 @@ public class Cita {
 
 			try {
 	
-				datos=declaracion.executeQuery("SELECT * FROM `cita` WHERE `id_Mascota` = '"+this.getId_Mascota()+"'");
+				datos=consulta.getCitasMascotaBD(this.getId_Mascota());
 				
 				while (datos.next()) {
 
@@ -190,7 +162,7 @@ public class Cita {
 		int num_Citas=0;
 
 		try {
-			datos=declaracion.executeQuery("SELECT count(*) from cita where id_Mascota ='"+this.getId_Mascota()+"';");
+			datos=consulta.getNumCitasBD(this.getId_Mascota());
 
 			if(datos.next()) {
 				num_Citas=datos.getInt(1);

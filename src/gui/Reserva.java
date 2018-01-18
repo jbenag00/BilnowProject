@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 
+import control.AccesoBD;
 import control.Carrito;
 import control.Producto;
 import control.Usuario;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
 import java.awt.FlowLayout;
@@ -40,6 +42,8 @@ public class Reserva {
 	public static Producto[] carrito=null;
 
 	private int pos_Objeto=0;
+	
+	private AccesoBD consulta;
 
 	/**
 	 * Launch the application.
@@ -64,6 +68,8 @@ public class Reserva {
 	public Reserva(Usuario user) {
 
 		carro_compra=new Carrito(user);
+		
+		consulta=new AccesoBD();
 
 		this.user=user;
 
@@ -85,6 +91,17 @@ public class Reserva {
 		frame.getContentPane().add(lblCarritoDeLa);
 
 		JButton btnRealizarPedido = new JButton("Realizar pedido");
+		btnRealizarPedido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Date fecha_Reserva=new Date();
+				
+				control.Reserva nueva=new control.Reserva(user.getDni_usuario(), new java.sql.Date(fecha_Reserva.getTime()), carro_compra);
+				
+				frame.setVisible(false);
+				
+			}
+		});
 		btnRealizarPedido.setBounds(880, 573, 112, 23);
 		frame.getContentPane().add(btnRealizarPedido);
 

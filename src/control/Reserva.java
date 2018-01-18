@@ -8,10 +8,6 @@ import java.util.Date;
 
 public class Reserva {
 
-	private Connection conexion;
-
-	private Statement declaracion;
-
 	private ResultSet datos;
 
 	private int id_Reserva;
@@ -19,31 +15,27 @@ public class Reserva {
 	private String id_Usuario;
 
 	private boolean recogido;
+	
+	private Date fecha_Pedido;
+	
+	private AccesoBD consulta;
+	
 
 
 	/**
 	 * 
 	 * @param id_Usuarios
-	 * @param lista_Productos
+	 * @param carro_compra
 	 */
-	public Reserva(String id_Usuarios, Date fecha, Producto[] lista_Productos){
+	public Reserva(String id_Usuario, Date fecha, Carrito carro_compra){
 
-		Conecta conectar = new Conecta();
+		consulta=new AccesoBD();
+	
+		consulta.aniadir_ReservaBD(id_Usuario,fecha);
 
-		conexion = conectar.getConexion();
-
-		try {
-
-			declaracion = conexion.createStatement();
-
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		this.aniadir_Productos(lista_Productos);
+		id_Reserva=consulta.getId_ReservaBD(id_Usuario,fecha);
+		
+		aniadir_Productos(carro_compra);
 
 	}
 
@@ -54,8 +46,16 @@ public class Reserva {
 	 * @param lista_Productos
 	 */
 	
-	private void aniadir_Productos(Producto[] lista_Productos) {
+	private void aniadir_Productos(Carrito lista_Productos) {
 		// TODO Auto-generated method stub
+				
+		for(int i=0;i<lista_Productos.getTamanio();i++) {
+			
+			consulta.aniadirReservaProductoBD(lista_Productos.getProd(i).getId_Prod(),id_Reserva);
+			
+			
+		}
+		
 
 	}
 
