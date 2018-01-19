@@ -46,6 +46,8 @@ public class Cliente {
 	public int pos;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JButton eliminar_Masc;
+	private JButton aniadir_Masc;
 
 	/**
 	 * Launch the application.
@@ -67,8 +69,12 @@ public class Cliente {
 	/**
 	 * Create the application.
 	 * @param user 
+	 * @param buttoneliminar 
+	 * @param btnagregarButton 
 	 */
-	public Cliente(Usuario user) {
+	public Cliente(Usuario user, JButton btnagregarButton, JButton buttoneliminar) {
+		eliminar_Masc=buttoneliminar;
+		aniadir_Masc=btnagregarButton;
 		this.cliente=user;
 		initialize();
 	}
@@ -158,7 +164,7 @@ public class Cliente {
 			}
 		});
 		
-		btnCatalogo.setBounds(561, 69, 209, 55);
+		btnCatalogo.setBounds(565, 54, 209, 55);
 		frame.getContentPane().add(btnCatalogo);
 		
 		JButton btnInfo = new JButton("Info");
@@ -170,7 +176,7 @@ public class Cliente {
 				
 			}
 		});
-		btnInfo.setBounds(676, 11, 98, 34);
+		btnInfo.setBounds(708, 11, 66, 30);
 		frame.getContentPane().add(btnInfo);
 		
 		JLabel lblTlfn = new JLabel("Tel\u00E9fono:");
@@ -183,6 +189,28 @@ public class Cliente {
 		textTlfn.setColumns(10);
 		textTlfn.setBounds(323, 72, 74, 17);
 		frame.getContentPane().add(textTlfn);
+		
+		if(eliminar_Masc!=null&&aniadir_Masc!=null) {
+			aniadir_Masc = new JButton("+");
+			aniadir_Masc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					Aniadirmascota nueva_Mascota=new Aniadirmascota();
+					nueva_Mascota.main(null);
+					
+				}
+			});
+			aniadir_Masc.setBounds(677, 133, 46, 39);
+			frame.getContentPane().add(aniadir_Masc);
+			
+			eliminar_Masc = new JButton("-");
+			eliminar_Masc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			eliminar_Masc.setBounds(741, 133, 46, 39);
+			frame.getContentPane().add(eliminar_Masc);
+		}
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);

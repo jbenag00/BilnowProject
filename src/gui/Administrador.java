@@ -39,16 +39,17 @@ public class Administrador {
 	private JTextField textEmail;
 	private JTextField textDni;
 	private JTextField textField;
-	public Usuario administrador;
+	private static Usuario administrador;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(Usuario user) {
+		administrador=user;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-			
+					
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 				
@@ -100,94 +101,11 @@ public class Administrador {
 		mntmAadirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				aniadircliente.main(null);
+				Aniadircliente.main(null);
+				
 			}
-
-			/**
-			 * 
-			 */
-		/*	public void crear_Cliente() {
-						
-				frame.getContentPane().add(panel_Cli);
-				
-				JLabel lblTelefono = new JLabel("Telefono:");
-				lblTelefono.setBounds(10, 194, 46, 14);
-				panel_Cli.add(lblTelefono);
-				
-				JLabel lblEmail = new JLabel("email");
-				lblEmail.setBounds(10, 254, 24, 14);
-				panel_Cli.add(lblEmail);
-				
-				JLabel lblNombre = new JLabel("nombre:");
-				lblNombre.setBounds(10, 101, 40, 14);
-				panel_Cli.add(lblNombre);
-				
-				JLabel lblApellindo = new JLabel("apellindo");
-				lblApellindo.setBounds(233, 101, 42, 14);
-				panel_Cli.add(lblApellindo);
-				
-				JLabel lblDireccion = new JLabel("Direccion:");
-				lblDireccion.setBounds(10, 152, 47, 14);
-				panel_Cli.add(lblDireccion);
-				
-				JLabel lblDni = new JLabel("dni: ");
-				lblDni.setBounds(13, 34, 86, 14);
-				panel_Cli.add(lblDni);
-				
-				textnom = new JTextField();
-				textnom.setBounds(286, 98, 86, 20);
-				panel_Cli.add(textnom);
-				textnom.setColumns(10);
-				
-				Apellido = new JTextField();
-				Apellido.setBounds(67, 152, 86, 20);
-				panel_Cli.add(Apellido);
-				Apellido.setColumns(10);
-				
-				textDireccion = new JTextField();
-				textDireccion.setBounds(60, 191, 86, 20);
-				panel_Cli.add(textDireccion);
-				textDireccion.setText("");
-				textDireccion.setColumns(10);
-				
-				textTelefono = new JTextField();
-				textTelefono.setBounds(44, 251, 86, 20);
-				panel_Cli.add(textTelefono);
-				textTelefono.setColumns(10);
-				
-				textEmail = new JTextField();
-				textEmail.setBounds(144, 31, 86, 20);
-				panel_Cli.add(textEmail);
-				textEmail.setColumns(10);
-				
-				textDni = new JTextField();
-				textDni.setBounds(60, 98, 86, 20);
-				panel_Cli.add(textDni);
-				textDni.setColumns(10);
-				
-				JButton btnGenerarContrasea = new JButton("Generar Contrase\u00F1a");
-				btnGenerarContrasea.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						generarContraseña();
-						
-					}
-					private void generarContraseña() {
-						// TODO Auto-generated method stub
-						
-					}
-				});
-				btnGenerarContrasea.setBounds(469, 388, 131, 23);
-				panel_Cli.add(btnGenerarContrasea);
-				
-				frame.repaint();
-				
-			}*/
 		});
 		mnInicio.add(mntmAadirCliente);
-		
-		JMenuItem mntmAadirMascota = new JMenuItem("A\u00F1adir Mascota");
-		mnInicio.add(mntmAadirMascota);
 		
 		
 		
@@ -195,22 +113,9 @@ public class Administrador {
 		mntmAadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				aniadirproducto.main(null);
+				Aniadirproducto.main(null);
 				
 			}
-
-		/*	private void aniadir_Producto() {
-				// TODO Auto-generated method stub
-				
-				frame.getContentPane().add(panel);
-				
-				JLabel lblAadirProducto = new JLabel("A\u00F1adir Producto");
-				lblAadirProducto.setBounds(88, 11, 325, 75);
-				panel.add(lblAadirProducto);
-				
-				frame.repaint();
-				
-			}*/
 		});
 		mnInicio.add(mntmAadirProducto);
 		
@@ -255,6 +160,27 @@ public class Administrador {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				String usuario=textField.getText();
+				boolean existe=false;
+				AccesoBD consulta=new AccesoBD();
+				existe=consulta.existeUser(usuario);
+				if(existe==true) {
+					
+					JButton btnagregarButton = new JButton("+");
+					JButton buttoneliminar = new JButton("-");
+					
+					Cliente cliente_Edita=new Cliente(new Usuario(usuario),btnagregarButton,buttoneliminar);
+					cliente_Edita.main();
+					
+				}
+				else {
+					Aniadircliente nuevo_Cliente=new Aniadircliente();
+					nuevo_Cliente.main(null);
+				}
+				
+				
 			}
 		});
 		btnBuscar.setBounds(200, 236, 89, 23);
@@ -275,7 +201,7 @@ public class Administrador {
 		JButton btnAadirCliente = new JButton("A\u00F1adir cliente");
 		btnAadirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				aniadircliente.main(null);
+				Aniadircliente.main(null);
 			}
 		});
 		btnAadirCliente.setBounds(95, 103, 169, 38);
@@ -288,7 +214,7 @@ public class Administrador {
 		JButton btnAniadirProducto = new JButton("A\u00F1adir producto");
 		btnAniadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				aniadirproducto.main(null);
+				Aniadirproducto.main(null);
 			}
 		});
 		btnAniadirProducto.setBounds(95, 153, 169, 38);

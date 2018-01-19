@@ -41,7 +41,7 @@ public class Usuario {
 	 * @param usuario
 	 * @param password
 	 */
-	public Usuario(String usuario, String password) {
+	public Usuario(String usuario) {
 
 		consulta=new AccesoBD();
 
@@ -59,7 +59,6 @@ public class Usuario {
 				this.setRol(datos.getInt(6));
 				this.setPw_usuario(datos.getString(7));
 				this.setEmail_usuario(datos.getString(8));
-
 
 			}
 

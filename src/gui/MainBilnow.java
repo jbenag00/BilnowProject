@@ -139,7 +139,7 @@ public class MainBilnow extends JFrame {
 				}
 				else if(control_error==2) {
 					
-					Usuario user=new Usuario(campo_Usuario.getText(),campo_Password.getText());
+					Usuario user=new Usuario(campo_Usuario.getText());
 					
 					if(campo_Usuario.getText().equals(user.getDni_usuario())){
 						
@@ -149,7 +149,7 @@ public class MainBilnow extends JFrame {
 								Administrador nA=new Administrador();
 								nA.main(null);
 							}else {
-								Cliente nC=new Cliente(user);
+								Cliente nC=new Cliente(user,null,null);
 								nC.main();
 							}
 							

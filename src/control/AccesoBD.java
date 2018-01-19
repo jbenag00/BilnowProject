@@ -11,6 +11,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * 
+ * @author Javier
+ *
+ */
 public class AccesoBD {
 
 	private Statement declaracion;
@@ -18,6 +23,9 @@ public class AccesoBD {
 	private ResultSet datos;
 
 
+	/**
+	 * 
+	 */
 	public AccesoBD() {
 
 
@@ -57,6 +65,7 @@ public class AccesoBD {
 		return datos;
 	}
 
+	
 	/**
 	 * 
 	 * @return
@@ -79,6 +88,7 @@ public class AccesoBD {
 
 	}
 
+	
 	/**
 	 * 
 	 * @return
@@ -94,6 +104,7 @@ public class AccesoBD {
 
 		return datos;
 	}
+	
 	
 	/**
 	 * 
@@ -114,6 +125,7 @@ public class AccesoBD {
 		
 	}
 	
+	
 	/**
 	 * @param string 
 	 * @return 
@@ -132,6 +144,7 @@ public class AccesoBD {
 		
 			return datos;
 	}
+	
 	
 	/**
 	 * 
@@ -153,6 +166,7 @@ public class AccesoBD {
 		return datos;
 	}
 	
+	
 	/**
 	 * 
 	 * @param dni_usuario 
@@ -171,6 +185,7 @@ public class AccesoBD {
 		return datos;
 	}
 	
+	
 	/**
 	 * 
 	 * 
@@ -187,6 +202,7 @@ public class AccesoBD {
 
 	}
 
+	
 	/*
 	 * 
 	 * 
@@ -204,6 +220,7 @@ public class AccesoBD {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @param nuevo_usuario
@@ -220,6 +237,7 @@ public class AccesoBD {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @param id_Usuario
@@ -235,6 +253,7 @@ public class AccesoBD {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @param new_Producto
@@ -251,6 +270,7 @@ public class AccesoBD {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @param id_Producto
@@ -267,6 +287,7 @@ public class AccesoBD {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @param id_Usuario
@@ -282,6 +303,7 @@ public class AccesoBD {
 		
 	}
 
+	
 	/**
 	 * 
 	 * @param id_Usuarios
@@ -309,6 +331,7 @@ public class AccesoBD {
 		return id;
 	}
 
+	
 	/**
 	 * 
 	 * @param id_Prod
@@ -329,6 +352,10 @@ public class AccesoBD {
 	}
 
 
+	/**
+	 * 
+	 * @param fileName
+	 */
 	public static void backup(File fileName) {
 	
 		      try {
@@ -355,10 +382,13 @@ public class AccesoBD {
 		}
 
 
+	/**
+	 * 
+	 * @param dni_usuario
+	 * @return
+	 */
 	public boolean existeUser(String dni_usuario) {
-		
-		System.out.println(dni_usuario);
-		
+			
 		boolean esta=true;
 		
 		try {
@@ -371,18 +401,20 @@ public class AccesoBD {
 			// TODO Auto-generated catch block
 			 e.printStackTrace();
 		}
-		
-		System.out.println(esta);
-		
+				
 		return esta;
 		
 	}
 
 
+	/**
+	 * 
+	 * @param pw_usuario
+	 * @param dni_usuario
+	 * @return
+	 */
 	public boolean existePasswd(String pw_usuario,String dni_usuario) {
-		
-		System.out.println(pw_usuario);
-		
+				
 		boolean esta=true;
 		
 		try {
@@ -395,11 +427,25 @@ public class AccesoBD {
 			// TODO Auto-generated catch block
 			 e.printStackTrace();
 		}
-		
-		System.out.println(esta);
-		
+				
 		return esta;
 
+	}
+
+	/**
+	 * 
+	 * @param dni
+	 * @param nom
+	 * @param ap
+	 * @param tlf
+	 * @param pswd
+	 * @param correo
+	 * @param dir
+	 * @param rol
+	 */
+	public void aniadir_UsuarioBD(String dni, String nom, String ap, String tlf, String pswd, String correo, String dir, int rol) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
