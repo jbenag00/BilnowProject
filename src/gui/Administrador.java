@@ -19,6 +19,8 @@ import javax.swing.WindowConstants;
 import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 
 import control.AccesoBD;
+import control.Producto;
+import control.Usuario;
 
 import javax.swing.JPanel;
 
@@ -36,6 +38,8 @@ public class Administrador {
 	private JTextField textTelefono;
 	private JTextField textEmail;
 	private JTextField textDni;
+	private JTextField textField;
+	public Usuario administrador;
 
 	/**
 	 * Launch the application.
@@ -68,9 +72,8 @@ public class Administrador {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 658, 509);
+		frame.setBounds(100, 100, 371, 354);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 642, 449);
@@ -97,13 +100,13 @@ public class Administrador {
 		mntmAadirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				crear_Cliente();
+				aniadircliente.main(null);
 			}
 
 			/**
 			 * 
 			 */
-			public void crear_Cliente() {
+		/*	public void crear_Cliente() {
 						
 				frame.getContentPane().add(panel_Cli);
 				
@@ -179,22 +182,24 @@ public class Administrador {
 				
 				frame.repaint();
 				
-			}
+			}*/
 		});
 		mnInicio.add(mntmAadirCliente);
 		
 		JMenuItem mntmAadirMascota = new JMenuItem("A\u00F1adir Mascota");
 		mnInicio.add(mntmAadirMascota);
 		
+		
+		
 		JMenuItem mntmAadirProducto = new JMenuItem("A\u00F1adir Producto");
 		mntmAadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				aniadir_Producto();
+				aniadirproducto.main(null);
 				
 			}
 
-			private void aniadir_Producto() {
+		/*	private void aniadir_Producto() {
 				// TODO Auto-generated method stub
 				
 				frame.getContentPane().add(panel);
@@ -205,7 +210,7 @@ public class Administrador {
 				
 				frame.repaint();
 				
-			}
+			}*/
 		});
 		mnInicio.add(mntmAadirProducto);
 		
@@ -236,5 +241,57 @@ public class Administrador {
 			}
 		});
 		mnOpcionesAdmin.add(mntmBackup);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblConsultarCliente = new JLabel("Consultar cliente");
+		lblConsultarCliente.setBounds(38, 215, 126, 14);
+		frame.getContentPane().add(lblConsultarCliente);
+		
+		textField = new JTextField();
+		textField.setBounds(104, 237, 86, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnBuscar.setBounds(200, 236, 89, 23);
+		frame.getContentPane().add(btnBuscar);
+		
+		JButton btnCatlogoDeProductos = new JButton("Cat\u00E1logo de productos");
+		btnCatlogoDeProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					
+					Reserva nueva=new Reserva(administrador);
+					nueva.main(null);
+					
+			}
+		});
+		btnCatlogoDeProductos.setBounds(95, 53, 169, 38);
+		frame.getContentPane().add(btnCatlogoDeProductos);
+		
+		JButton btnAadirCliente = new JButton("A\u00F1adir cliente");
+		btnAadirCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aniadircliente.main(null);
+			}
+		});
+		btnAadirCliente.setBounds(95, 103, 169, 38);
+		frame.getContentPane().add(btnAadirCliente);
+		
+		JLabel lblDni_1 = new JLabel("DNI");
+		lblDni_1.setBounds(66, 240, 46, 14);
+		frame.getContentPane().add(lblDni_1);
+		
+		JButton btnAniadirProducto = new JButton("A\u00F1adir producto");
+		btnAniadirProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aniadirproducto.main(null);
+			}
+		});
+		btnAniadirProducto.setBounds(95, 153, 169, 38);
+		frame.getContentPane().add(btnAniadirProducto);
 	}
 }

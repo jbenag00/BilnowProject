@@ -29,6 +29,8 @@ import javax.swing.WindowConstants;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
+import javax.swing.JRadioButtonMenuItem;
 
 public class Cliente {
 
@@ -37,10 +39,13 @@ public class Cliente {
 	private JTextField textDireccion;
 	private JTextField textNombre;
 	private JTextField textCorreo;
+	private JTextField textTlfn;
 	private Usuario cliente;
 	private Mascota mascota_Control;
 	public int pos_Mascota;
 	public int pos;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -90,42 +95,46 @@ public class Cliente {
 		btnPedirCita.setBounds(659, 459, 134, 39);
 
 		JLabel lblDni = new JLabel("Dni:");
-		lblDni.setBounds(29, 31, 46, 14);
+		lblDni.setBounds(29, 74, 46, 14);
 		frame.getContentPane().add(lblDni);
 
 		textDni = new JTextField();
-		textDni.setBounds(52, 28, 86, 20);
+		textDni.setEditable(false);
+		textDni.setBounds(146, 71, 86, 20);
 		frame.getContentPane().add(textDni);
 		textDni.setColumns(10);
 		textDni.setText(cliente.getDni_usuario());
 		//mostrar_Mascotas();
 
 		JLabel lblDireccion = new JLabel("Direccion:");
-		lblDireccion.setBounds(29, 69, 66, 14);
+		lblDireccion.setBounds(29, 105, 66, 14);
 		frame.getContentPane().add(lblDireccion);
 
 		textDireccion = new JTextField();
-		textDireccion.setBounds(123, 67, 373, 17);
+		textDireccion.setEditable(false);
+		textDireccion.setBounds(146, 103, 362, 17);
 		frame.getContentPane().add(textDireccion);
 		textDireccion.setColumns(10);
 		textDireccion.setText(cliente.getDireccion_usuario());
 
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(186, 31, 46, 14);
+		lblNombre.setBounds(29, 45, 66, 14);
 		frame.getContentPane().add(lblNombre);
 
 		textNombre = new JTextField();
-		textNombre.setBounds(242, 28, 251, 17);
+		textNombre.setEditable(false);
+		textNombre.setBounds(146, 43, 251, 17);
 		frame.getContentPane().add(textNombre);
 		textNombre.setColumns(10);
 		textNombre.setText(cliente.getNombre_usuario());
 
 		JLabel lblCorreoElectronico = new JLabel("Correo electronico:");
-		lblCorreoElectronico.setBounds(29, 113, 98, 14);
+		lblCorreoElectronico.setBounds(29, 133, 107, 17);
 		frame.getContentPane().add(lblCorreoElectronico);
 
 		textCorreo = new JTextField();
-		textCorreo.setBounds(137, 110, 362, 20);
+		textCorreo.setEditable(false);
+		textCorreo.setBounds(146, 131, 362, 20);
 		frame.getContentPane().add(textCorreo);
 		textCorreo.setColumns(10);
 		textCorreo.setText(cliente.getEmail_usuario());
@@ -139,8 +148,8 @@ public class Cliente {
 		scrollPane.setViewportView(panel);
 		panel.setLayout(null);
 		
-		JButton btnReserve = new JButton("Reservar");
-		btnReserve.addActionListener(new ActionListener() {
+		JButton btnCatalogo = new JButton("Cat\u00E1logo");
+		btnCatalogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Reserva nueva=new Reserva(cliente);
@@ -149,19 +158,65 @@ public class Cliente {
 			}
 		});
 		
-		btnReserve.setBounds(561, 69, 209, 55);
-		frame.getContentPane().add(btnReserve);
+		btnCatalogo.setBounds(561, 69, 209, 55);
+		frame.getContentPane().add(btnCatalogo);
 		
-		JButton btnI = new JButton("i");
-		btnI.addActionListener(new ActionListener() {
+		JButton btnInfo = new JButton("Info");
+		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Informacion info_ventana=new Informacion();
+				info_ventana.main(null);
 				
 			}
 		});
-		btnI.setBounds(739, 11, 35, 34);
-		frame.getContentPane().add(btnI);
+		btnInfo.setBounds(676, 11, 98, 34);
+		frame.getContentPane().add(btnInfo);
+		
+		JLabel lblTlfn = new JLabel("Tel\u00E9fono:");
+		lblTlfn.setBounds(256, 74, 66, 14);
+		frame.getContentPane().add(lblTlfn);
+		
+		textTlfn = new JTextField();
+		textTlfn.setText(cliente.getTlf_Usuario());
+		textTlfn.setEditable(false);
+		textTlfn.setColumns(10);
+		textTlfn.setBounds(323, 72, 74, 17);
+		frame.getContentPane().add(textTlfn);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu menu = new JMenu("Inicio");
+		menuBar.add(menu);
+		
+		JMenuItem mntmVerCatlogo = new JMenuItem("Ver Cat\u00E1logo");
+		menu.add(mntmVerCatlogo);
+		mntmVerCatlogo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Reserva verCatalogo=new Reserva(cliente);
+				verCatalogo.main(null);
+			}
+		});
+		
+		JMenuItem mntmAyuda = new JMenuItem("Ayuda");
+		menu.add(mntmAyuda);
+		mntmAyuda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Informacion info_ventana=new Informacion();
+				Informacion.main(null);
+				
+			}
+		});
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		menu.add(mntmSalir);
+		
 				
 		pos=0;
 		

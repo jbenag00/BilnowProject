@@ -18,21 +18,22 @@ public class Usuario {
 
 	private static String dni_usuario;
 
+	private static String pw_usuario;
+
 	private String nombre_usuario;
 
 	private String tlf_Usuario;
-	
+
 	private String dir_usuario;
 
 	private String email_usuario;
-	
+
 	private int rol_usuario;
-		
-	//cambiar esto por un Arraylist<Mascota> hay que cambiar la forma de obtencion de los datos.
+
 	private Mascota[] mascotas_Usuario;
-	
+
 	private Mascota mascota_Control;
-	
+
 	private AccesoBD consulta;
 
 	/**
@@ -41,11 +42,9 @@ public class Usuario {
 	 * @param password
 	 */
 	public Usuario(String usuario, String password) {
-		
+
 		consulta=new AccesoBD();
 
-		Conecta conexion=new Conecta();
-		Connection nueva=conexion.getConexion();
 		mascota_Control=new Mascota();
 
 		try {
@@ -58,7 +57,9 @@ public class Usuario {
 				this.settlf_Usuario(datos.getString(4));
 				this.setDireccion_usuario(datos.getString(5));
 				this.setRol(datos.getInt(6));
+				this.setPw_usuario(datos.getString(7));
 				this.setEmail_usuario(datos.getString(8));
+
 
 			}
 
@@ -71,19 +72,23 @@ public class Usuario {
 		}
 
 	}
-	
+
+	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private void setRol(int rol) {
 		// TODO Auto-generated method stub
-	
+
 		this.rol_usuario=rol;
-		
+
 	}
 
 	private void settlf_Usuario(String tlf) {
 		// TODO Auto-generated method stub
-		
+
 		this.tlf_Usuario=tlf;
-		
+
 	}
 
 	/**
@@ -167,21 +172,71 @@ public class Usuario {
 	 * @param nuevo_usuario
 	 */
 	public void aniadir_Usuario() {
-		
+
 		consulta.aniadir_UsuarioBD(this); 
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param id_Usuario
 	 */
 	public void eliminar_Usuario(String id_Usuario) {
-		
+
 		consulta.eliminar_UsuarioBD(this.getDni_usuario());
+
+	}
+
+	public int getRol_usuario() {
+		return rol_usuario;
+	}
+
+	private void setRol_usuario(int rol_usuario) {
+		this.rol_usuario = rol_usuario;
+	}
+
+	public String getPw_usuario() {
+		return pw_usuario;
+	}
+
+	private void setPw_usuario(String pw_usuario) {
+		this.pw_usuario = pw_usuario;
+	}
+
+	public String getTlf_Usuario() {
+		return tlf_Usuario;
+	}
+
+	private void setTlf_Usuario(String tlf_Usuario) {
+		this.tlf_Usuario = tlf_Usuario;
+	}
+
+	public int comprobarUsuario(String id_User, String pw_User) {
+
+		AccesoBD consulta2=new AccesoBD();
+		boolean existe_User=false;
+		boolean existe_Psswd=false;
+		existe_User=consulta2.existeUser(id_User);
 		
+		if(existe_User==true){
+
+			existe_Psswd=consulta2.existePasswd(pw_User,id_User);
+
+			if(existe_Psswd==true) {
+				return 2;
+			}
+			else {
+				return 1;
+			}
+			
+		}
+		else {
+			return 0;
+		}
+
+
+
 	}
 
 
-	
 }

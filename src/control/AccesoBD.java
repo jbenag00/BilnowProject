@@ -2,6 +2,7 @@ package control;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -329,29 +330,76 @@ public class AccesoBD {
 
 
 	public static void backup(File fileName) {
-		   try {
-		      Process p = Runtime
-		            .getRuntime()
-		            .exec("D:/ProgramasHDD/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump -u root -ppassword database");
+	
+		      try {
+				   String rutaMySqlDump = "C:\\Archivos de programa\\MySQL\\MySQL Server 5.0\\bin\\mysqldump.exe";
+				    String contrasenia ="";
+				    String usuario = "root";
+				    String dataBase = "bilnow_db";
+				    
+				    String cad = "\"" + rutaMySqlDump + "\" --opt --password=" + contrasenia + " --user=" + usuario + " " + dataBase + " > \"" + fileName.getAbsolutePath()+".sql" +"\"\n";
 
-		      InputStream is = p.getInputStream();
-		      FileOutputStream fos = new FileOutputStream(fileName.getAbsolutePath()+".backup-"+new Date().getTime()+".sql");
-		      byte[] buffer = new byte[1000];
 
-		     for(int i=0;i<buffer.length;i++) {
-		    	 System.out.println(buffer[i]);
-		     }
-		      int leido = is.read(buffer);
-		      while (leido > 0) {
-		         fos.write(buffer, 0, leido);
-		         leido = is.read(buffer);
-		      }
+		            File fcopi = new File("copia_seguridad.bat");
+		            FileWriter fw = new FileWriter(fcopi);
+		            fw.write(cad, 0, cad.length());
+		            fw.close();
+		            Runtime.getRuntime().exec("copia_Seguridad.bat");
+				    
+				    
+			   } catch (Exception e) {
+			      e.printStackTrace();
+			   }
 
-		      fos.close();
-
-		   } catch (Exception e) {
-		      e.printStackTrace();
-		   }
+		 
 		}
+
+
+	public boolean existeUser(String dni_usuario) {
+		
+		System.out.println(dni_usuario);
+		
+		boolean esta=true;
+		
+		try {
+			datos=declaracion.executeQuery("Select * from `usuario` where `id_Usuario` = '"+dni_usuario+"';");
+			
+			if(datos.next()==false) {
+				esta=false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			 e.printStackTrace();
+		}
+		
+		System.out.println(esta);
+		
+		return esta;
+		
+	}
+
+
+	public boolean existePasswd(String pw_usuario,String dni_usuario) {
+		
+		System.out.println(pw_usuario);
+		
+		boolean esta=true;
+		
+		try {
+			datos=declaracion.executeQuery("SELECT * FROM `usuario` WHERE `id_Usuario`='"+dni_usuario+"' and `pswd_Usuario`='"+pw_usuario+"';");
+			
+			if(datos.next()==false) {
+				esta=false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			 e.printStackTrace();
+		}
+		
+		System.out.println(esta);
+		
+		return esta;
+
+	}
 
 }
