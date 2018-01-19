@@ -149,8 +149,19 @@ public class Cliente {
 			}
 		});
 		
-		btnReserve.setBounds(571, 43, 209, 55);
+		btnReserve.setBounds(561, 69, 209, 55);
 		frame.getContentPane().add(btnReserve);
+		
+		JButton btnI = new JButton("i");
+		btnI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Informacion info_ventana=new Informacion();
+				
+			}
+		});
+		btnI.setBounds(739, 11, 35, 34);
+		frame.getContentPane().add(btnI);
 				
 		pos=0;
 		

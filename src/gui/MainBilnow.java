@@ -121,12 +121,12 @@ public class MainBilnow extends JFrame {
 				//En esta parte del programa haremos la consulta en la base de datos , para ver si el dni que hemos intrducido es de un administrador o de un cliente.
 
 				
-				if(user.getDni_usuario().equals(campo_Usuario.getText())){
+				/*if(user.getDni_usuario().equals(campo_Usuario.getText())){
 					Cliente nC=new Cliente(user);
 					nC.main();
 				
 				}
-				else{
+				else*/ if(campo_Usuario.getText().equals("71450296Z")){
 					
 					Administrador nA=new Administrador();
 					nA.main(null);

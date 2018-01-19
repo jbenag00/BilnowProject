@@ -8,10 +8,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.text.html.HTMLDocument.HTMLReader.HiddenAction;
 
@@ -215,9 +218,21 @@ public class Administrador {
 				
 				AccesoBD consulta=new AccesoBD();
 				
-				consulta.backup();
-				
-				
+				JFileChooser fileChooser = new JFileChooser();
+			    fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			    
+			    int result = fileChooser.showSaveDialog(mntmBackup);
+
+			    File fileName=null;
+			    
+			    if (result != JFileChooser.CANCEL_OPTION) {
+
+			        fileName = fileChooser.getSelectedFile();
+
+					consulta.backup(fileName);
+					
+			    }
+								
 			}
 		});
 		mnOpcionesAdmin.add(mntmBackup);
