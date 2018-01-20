@@ -180,10 +180,9 @@ public class Reserva {
 						
 					}
 				});
+				btnEliminar.setBounds(10, 166, 65, 23);
+				panel_1.add(btnEliminar);
 			}
-			
-			btnEliminar.setBounds(10, 166, 65, 23);
-			panel_1.add(btnEliminar);
 			
 			JButton btnAdd = new JButton("ADD");
 			btnAdd.addActionListener(new ActionListener() {
