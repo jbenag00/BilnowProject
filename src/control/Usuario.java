@@ -166,26 +166,6 @@ public class Usuario {
 
 	}
 
-	/**
-	 * 
-	 * @param nuevo_usuario
-	 */
-	public void aniadir_Usuario() {
-
-		consulta.aniadir_UsuarioBD(this); 
-
-	}
-
-	/**
-	 * 
-	 * @param id_Usuario
-	 */
-	public void eliminar_Usuario(String id_Usuario) {
-
-		consulta.eliminar_UsuarioBD(this.getDni_usuario());
-
-	}
-
 	public int getRol_usuario() {
 		return rol_usuario;
 	}
@@ -215,11 +195,11 @@ public class Usuario {
 		AccesoBD consulta2=new AccesoBD();
 		boolean existe_User=false;
 		boolean existe_Psswd=false;
-		existe_User=consulta2.existeUser(id_User);
+		existe_User=consulta2.existeUserBD(id_User);
 		
 		if(existe_User==true){
 
-			existe_Psswd=consulta2.existePasswd(pw_User,id_User);
+			existe_Psswd=consulta2.existePasswdBD(pw_User,id_User);
 
 			if(existe_Psswd==true) {
 				return 2;

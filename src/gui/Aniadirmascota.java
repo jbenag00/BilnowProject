@@ -8,31 +8,41 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JDateChooser;
+
+import control.AccesoBD;
+import control.Usuario;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class Aniadirmascota extends JFrame {
 
-	private JPanel contentPane;
+	private static Aniadirmascota frame;
+	private static JPanel contentPane;
 	private JTextField textFieldDNIMascota;
 	private JTextField textNombre;
 	private JTextField textField_3;
 	private JTextField textRaza;
 	private JTextField textEspecie;
-	private JTextField textFecha;
 	private JTextField textDNIDuenio;
 	private JTextField textCapa;
+	private AccesoBD consulta;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String id_Duenio) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Aniadirmascota frame = new Aniadirmascota();
+					frame = new Aniadirmascota(id_Duenio);
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
@@ -45,8 +55,9 @@ public class Aniadirmascota extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param string 
 	 */
-	public Aniadirmascota() {
+	public Aniadirmascota(String id_Duenio) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 499, 439);
 		contentPane = new JPanel();
@@ -68,7 +79,7 @@ public class Aniadirmascota extends JFrame {
 		panel.add(lblDnimascota);
 		
 		textFieldDNIMascota = new JTextField();
-		textFieldDNIMascota.setBounds(152, 77, 162, 20);
+		textFieldDNIMascota.setBounds(143, 74, 162, 20);
 		panel.add(textFieldDNIMascota);
 		textFieldDNIMascota.setColumns(10);
 		
@@ -81,12 +92,12 @@ public class Aniadirmascota extends JFrame {
 		panel.add(lblCapa);
 		
 		textNombre = new JTextField();
-		textNombre.setBounds(152, 102, 116, 20);
+		textNombre.setBounds(153, 99, 116, 20);
 		panel.add(textNombre);
 		textNombre.setColumns(10);
 		
 		textEspecie = new JTextField();
-		textEspecie.setBounds(152, 127, 116, 20);
+		textEspecie.setBounds(153, 124, 116, 20);
 		panel.add(textEspecie);
 		textEspecie.setColumns(10);
 		
@@ -101,6 +112,10 @@ public class Aniadirmascota extends JFrame {
 		JLabel lblFechanacimiento = new JLabel("Fecha de nacimiento");
 		lblFechanacimiento.setBounds(43, 202, 110, 14);
 		panel.add(lblFechanacimiento);
+		
+		JDateChooser elegir_Fecha=new JDateChooser();
+		elegir_Fecha.setBounds(153, 196, 116, 20);
+		panel.add(elegir_Fecha);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setBounds(43, 232, 35, 14);
@@ -120,25 +135,50 @@ public class Aniadirmascota extends JFrame {
 		
 		textRaza = new JTextField();
 		textRaza.setColumns(10);
-		textRaza.setBounds(152, 152, 116, 20);
+		textRaza.setBounds(153, 149, 116, 20);
 		panel.add(textRaza);
-		
-		textFecha = new JTextField();
-		textFecha.setColumns(10);
-		textFecha.setBounds(152, 202, 116, 20);
-		panel.add(textFecha);
 		
 		textDNIDuenio = new JTextField();
 		textDNIDuenio.setColumns(10);
 		textDNIDuenio.setBounds(152, 257, 116, 20);
 		panel.add(textDNIDuenio);
+		textDNIDuenio.setText(id_Duenio);
 		
 		textCapa = new JTextField();
 		textCapa.setColumns(10);
-		textCapa.setBounds(152, 177, 116, 20);
+		textCapa.setBounds(153, 174, 116, 20);
 		panel.add(textCapa);
 		
 		JButton btnAniadir = new JButton("A\u00F1adir");
+		btnAniadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				boolean existe=false;
+				AccesoBD consulta=new AccesoBD();
+				existe=consulta.existeMascotaBD(textFieldDNIMascota.getText());
+				if(existe==true) {
+					
+					JOptionPane.showMessageDialog(btnAniadir, "Mascota ya registrada en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+					
+				}
+				else {
+
+					consulta=new AccesoBD();
+					
+					int sexo=0;
+					
+					if(chckbxMacho.isSelected()) {
+						sexo=1;
+					}
+					
+					consulta.aniadir_MascotaBD(textFieldDNIMascota.getText(),textNombre.getText(),textEspecie.getText(),textRaza.getText(),textCapa.getText(),elegir_Fecha.getDate(),sexo,textDNIDuenio.getText());
+				
+					frame.setVisible(false);
+					
+				}
+				
+			}
+		});
 		btnAniadir.setBounds(191, 308, 89, 23);
 		panel.add(btnAniadir);
 		

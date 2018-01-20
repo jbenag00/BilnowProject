@@ -158,7 +158,7 @@ public class Cliente {
 		btnCatalogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Reserva nueva=new Reserva(cliente);
+				Reserva nueva=new Reserva(cliente,null,null);
 				nueva.main(null);
 				
 			}
@@ -195,8 +195,8 @@ public class Cliente {
 			aniadir_Masc.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
-					Aniadirmascota nueva_Mascota=new Aniadirmascota();
-					nueva_Mascota.main(null);
+					Aniadirmascota nueva_Mascota=new Aniadirmascota(cliente.getDni_usuario());
+					nueva_Mascota.main(cliente.getDni_usuario());
 					
 				}
 			});
@@ -225,7 +225,7 @@ public class Cliente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Reserva verCatalogo=new Reserva(cliente);
+				Reserva verCatalogo=new Reserva(cliente,null,null);
 				verCatalogo.main(null);
 			}
 		});

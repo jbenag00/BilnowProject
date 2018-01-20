@@ -139,7 +139,7 @@ public class Administrador {
 
 			        fileName = fileChooser.getSelectedFile();
 
-					consulta.backup(fileName);
+					consulta.backupBD(fileName);
 					
 			    }
 								
@@ -165,7 +165,7 @@ public class Administrador {
 				String usuario=textField.getText();
 				boolean existe=false;
 				AccesoBD consulta=new AccesoBD();
-				existe=consulta.existeUser(usuario);
+				existe=consulta.existeUserBD(usuario);
 				if(existe==true) {
 					
 					JButton btnagregarButton = new JButton("+");
@@ -186,25 +186,13 @@ public class Administrador {
 		btnBuscar.setBounds(200, 236, 89, 23);
 		frame.getContentPane().add(btnBuscar);
 		
-		JButton btnCatlogoDeProductos = new JButton("Cat\u00E1logo de productos");
-		btnCatlogoDeProductos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					
-					Reserva nueva=new Reserva(administrador);
-					nueva.main(null);
-					
-			}
-		});
-		btnCatlogoDeProductos.setBounds(95, 53, 169, 38);
-		frame.getContentPane().add(btnCatlogoDeProductos);
-		
 		JButton btnAadirCliente = new JButton("A\u00F1adir cliente");
 		btnAadirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Aniadircliente.main(null);
 			}
 		});
-		btnAadirCliente.setBounds(95, 103, 169, 38);
+		btnAadirCliente.setBounds(95, 50, 169, 38);
 		frame.getContentPane().add(btnAadirCliente);
 		
 		JLabel lblDni_1 = new JLabel("DNI");
@@ -214,10 +202,16 @@ public class Administrador {
 		JButton btnAniadirProducto = new JButton("A\u00F1adir producto");
 		btnAniadirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Aniadirproducto.main(null);
+			
+				JButton aniadir= new JButton("+");
+				JButton eliminar=new JButton("-");
+				
+				Reserva admin_Productos=new Reserva(administrador,aniadir,eliminar);
+				admin_Productos.main(null);
+				
 			}
 		});
-		btnAniadirProducto.setBounds(95, 153, 169, 38);
+		btnAniadirProducto.setBounds(95, 114, 169, 38);
 		frame.getContentPane().add(btnAniadirProducto);
 	}
 }

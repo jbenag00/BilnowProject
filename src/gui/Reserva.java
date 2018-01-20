@@ -44,7 +44,11 @@ public class Reserva {
 	private int pos_Objeto=0;
 	
 	private AccesoBD consulta;
+	
+	private JButton aniadir_Prod;
 
+	private JButton eliminar_Prod;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,10 +67,16 @@ public class Reserva {
 
 	/**
 	 * Create the application.
+	 * @param eliminar 
+	 * @param aniadir 
 	 * @wbp.parser.entryPoint
 	 */
-	public Reserva(Usuario user) {
+	public Reserva(Usuario user, JButton aniadir, JButton eliminar) {
 
+		aniadir_Prod=aniadir;
+		
+		eliminar_Prod=eliminar;
+		
 		carro_compra=new Carrito(user);
 		
 		consulta=new AccesoBD();
@@ -206,6 +216,29 @@ public class Reserva {
 						
 		});	
 		frame.getContentPane().add(btnQuitarProducto);
+		
+		if(aniadir_Prod!=null&&eliminar_Prod!=null) {
+		
+			aniadir_Prod.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					Aniadirproducto aniadirproducto=new Aniadirproducto();
+					aniadirproducto.main(null);
+					
+				}
+			});
+			aniadir_Prod.setBounds(487, 557, 53, 39);
+			frame.getContentPane().add(aniadir_Prod);
+			
+			
+			eliminar_Prod.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			eliminar_Prod.setBounds(559, 557, 53, 39);
+			frame.getContentPane().add(eliminar_Prod);
+			
+		}
 
 		frame.repaint();
 	}

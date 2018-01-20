@@ -12,6 +12,8 @@ import control.Usuario;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -25,6 +27,7 @@ public class Aniadircliente extends JFrame {
 	private JPanel contentPane;
 	private JTextField textDNI;
 	private JTextField textNombre;
+	private static Aniadircliente frame ;
 	private JTextField textDireccion;
 	private JTextField textCorreo;
 	private JTextField textApellido;
@@ -38,7 +41,7 @@ public class Aniadircliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Aniadircliente frame = new Aniadircliente();
+					frame = new Aniadircliente();
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
@@ -148,22 +151,36 @@ public class Aniadircliente extends JFrame {
 		btnAniadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int rol=1;
-				
-				if(checkBoxAdmin.isSelected()) {
-					rol=0;
+				boolean existe=false;
+				AccesoBD consulta=new AccesoBD();
+				existe=consulta.existeUserBD(textDNI.getText());
+				if(existe==true) {
+					
+					JOptionPane.showMessageDialog(btnAniadir, "Usuario ya registrado en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+					
 				}
-				
-				AccesoBD nuevo=new AccesoBD();
-				
-				nuevo.aniadir_UsuarioBD(textDNI.getText(),textNombre.getText(),textApellido.getText(),textTelefono.getText(),textContrasenia.getText(),textCorreo.getText(),textDireccion.getText(),rol);
-				
-				JButton btnagregarButton = new JButton("+");
-				JButton buttoneliminar = new JButton("-");
-				
-				Cliente cliente_Edita=new Cliente(new Usuario(textDNI.getText()),btnagregarButton,buttoneliminar);
-				cliente_Edita.main();
-				
+				else {
+					
+					int rol=1;
+					
+					if(checkBoxAdmin.isSelected()) {
+						rol=0;
+					}
+					
+					AccesoBD nuevo=new AccesoBD();
+					
+					nuevo.aniadir_UsuarioBD(textDNI.getText(),textNombre.getText(),textApellido.getText(),textTelefono.getText(),textContrasenia.getText(),textCorreo.getText(),textDireccion.getText(),rol);
+					
+					JButton btnagregarButton = new JButton("+");
+					JButton buttoneliminar = new JButton("-");
+					
+					Cliente cliente_Edita=new Cliente(new Usuario(textDNI.getText()),btnagregarButton,buttoneliminar);
+					cliente_Edita.main();
+					
+					frame.setVisible(false);	
+					
+				}
+								
 			}
 		});
 		btnAniadir.setBounds(192, 299, 89, 23);

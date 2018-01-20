@@ -106,8 +106,8 @@ public class Mascota {
 			public void actionPerformed(ActionEvent arg0) {
 			
 				gui.Cita editar_Reserva=new gui.Cita();
-				JButton btnEditarCita = new JButton("Editar cita");
-				editar_Reserva.main(mascota_seleccionada,btnEditarCita);
+				control_Cita.eliminarCita(cita_Seleccionada);
+				editar_Reserva.main(mascota_seleccionada,null);
 				
 				frame.setVisible(false);
 				
