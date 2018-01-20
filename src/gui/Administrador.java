@@ -170,8 +170,9 @@ public class Administrador {
 					
 					JButton btnagregarButton = new JButton("+");
 					JButton buttoneliminar = new JButton("-");
+					JButton eliminarUser = new JButton("Eliminar usuario");
 					
-					Cliente cliente_Edita=new Cliente(new Usuario(usuario),btnagregarButton,buttoneliminar);
+					Cliente cliente_Edita=new Cliente(new Usuario(usuario),btnagregarButton,buttoneliminar,eliminarUser);
 					cliente_Edita.main();
 					
 				}

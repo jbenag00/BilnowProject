@@ -495,4 +495,60 @@ public class AccesoBD {
 		return esta;
 	}
 
+
+	/**
+	 * 
+	 * @param dni_Mascota
+	 */
+	public void eliminarMascotaBD(String dni_Mascota) {
+
+		try {
+			declaracion.execute("DELETE FROM `mascota` WHERE `id_Mascota` = '"+dni_Mascota+"';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	/**
+	 * 
+	 * @param id_Prod
+	 */
+	public void eliminarProductoBD(String id_Prod) {
+		
+		try {
+			declaracion.execute("DELETE FROM `productos` WHERE `id_Producto` = '"+id_Prod+"';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public void eliminarCitaMascotaBD(String dni_Mascota) {
+
+		try {
+			declaracion.execute("DELETE FROM `cita` WHERE`id_Mascota` = '"+dni_Mascota+"';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	public void eliminarUsuarioBD(String dni_usuario) {
+		
+		try {
+			declaracion.execute("DELETE FROM `usuario` WHERE`id_Usuario` = '"+dni_usuario+"';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 }

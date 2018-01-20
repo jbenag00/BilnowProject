@@ -149,7 +149,7 @@ public class MainBilnow extends JFrame {
 								Administrador nA=new Administrador();
 								nA.main(null);
 							}else {
-								Cliente nC=new Cliente(user,null,null);
+								Cliente nC=new Cliente(user,null,null,null);
 								nC.main();
 							}
 							

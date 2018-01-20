@@ -47,7 +47,7 @@ public class Reserva {
 	
 	private JButton aniadir_Prod;
 
-	private JButton eliminar_Prod;
+	private JButton btnEliminar;
 	
 	/**
 	 * Launch the application.
@@ -75,7 +75,7 @@ public class Reserva {
 
 		aniadir_Prod=aniadir;
 		
-		eliminar_Prod=eliminar;
+		btnEliminar=eliminar;
 		
 		carro_compra=new Carrito(user);
 		
@@ -127,7 +127,7 @@ public class Reserva {
 		JPanel panel_1 = new JPanel();
 		scrollPane.setViewportView(panel_1);
 		panel_1.setLayout(null);
-
+		
 		//Crear array de todos los productos;
 
 		carrito=new Producto[carro_compra.getTamanio()];
@@ -171,6 +171,20 @@ public class Reserva {
 			lblPrecio.setBounds(30, 101, 46, 14);
 			panel_2.add(lblPrecio);		
 
+			if(btnEliminar!=null) {
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						AccesoBD consulta=new AccesoBD();
+						consulta.eliminarProductoBD(lblNomprod.getText());
+						
+					}
+				});
+			}
+			
+			btnEliminar.setBounds(10, 166, 65, 23);
+			panel_1.add(btnEliminar);
+			
 			JButton btnAdd = new JButton("ADD");
 			btnAdd.addActionListener(new ActionListener() {
 
@@ -217,7 +231,7 @@ public class Reserva {
 		});	
 		frame.getContentPane().add(btnQuitarProducto);
 		
-		if(aniadir_Prod!=null&&eliminar_Prod!=null) {
+		if(aniadir_Prod!=null) {
 		
 			aniadir_Prod.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -229,15 +243,6 @@ public class Reserva {
 			});
 			aniadir_Prod.setBounds(487, 557, 53, 39);
 			frame.getContentPane().add(aniadir_Prod);
-			
-			
-			eliminar_Prod.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-			eliminar_Prod.setBounds(559, 557, 53, 39);
-			frame.getContentPane().add(eliminar_Prod);
-			
 		}
 
 		frame.repaint();

@@ -48,6 +48,7 @@ public class Cliente {
 	private JTextField textField_1;
 	private JButton eliminar_Masc;
 	private JButton aniadir_Masc;
+	private JButton eliminar_Usuario;
 
 	/**
 	 * Launch the application.
@@ -71,8 +72,10 @@ public class Cliente {
 	 * @param user 
 	 * @param buttoneliminar 
 	 * @param btnagregarButton 
+	 * @param eliminarUser 
 	 */
-	public Cliente(Usuario user, JButton btnagregarButton, JButton buttoneliminar) {
+	public Cliente(Usuario user, JButton btnagregarButton, JButton buttoneliminar, JButton eliminarUser) {
+		eliminar_Usuario=eliminarUser;
 		eliminar_Masc=buttoneliminar;
 		aniadir_Masc=btnagregarButton;
 		this.cliente=user;
@@ -95,7 +98,7 @@ public class Cliente {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Cita nueva=new Cita();
-				nueva.main(cliente.getMascota(0),null);	
+				nueva.main(cliente.getMascota(pos_Mascota),null);	
 			}
 		});
 		btnPedirCita.setBounds(659, 459, 134, 39);
@@ -189,9 +192,22 @@ public class Cliente {
 		textTlfn.setColumns(10);
 		textTlfn.setBounds(323, 72, 74, 17);
 		frame.getContentPane().add(textTlfn);
+
 		
 		if(eliminar_Masc!=null&&aniadir_Masc!=null) {
-			aniadir_Masc = new JButton("+");
+			
+			eliminar_Usuario.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					AccesoBD consulta=new AccesoBD();
+					consulta.eliminarUsuarioBD(cliente.getDni_usuario());
+					frame.setVisible(false);
+					
+				}
+			});
+			eliminar_Usuario.setBounds(29, 448, 178, 30);
+			frame.getContentPane().add(eliminar_Usuario);
+			
 			aniadir_Masc.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
@@ -203,9 +219,15 @@ public class Cliente {
 			aniadir_Masc.setBounds(677, 133, 46, 39);
 			frame.getContentPane().add(aniadir_Masc);
 			
-			eliminar_Masc = new JButton("-");
 			eliminar_Masc.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					AccesoBD consulta=new AccesoBD();
+					
+					consulta.eliminarMascotaBD(cliente.getMascota(pos_Mascota).getDni_Mascota());
+					
+					consulta.eliminarCitaMascotaBD(cliente.getMascota(pos_Mascota).getDni_Mascota());
+					
 				}
 			});
 			eliminar_Masc.setBounds(741, 133, 46, 39);

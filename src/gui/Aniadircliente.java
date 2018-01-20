@@ -173,8 +173,9 @@ public class Aniadircliente extends JFrame {
 					
 					JButton btnagregarButton = new JButton("+");
 					JButton buttoneliminar = new JButton("-");
+					JButton eliminarUser=new JButton("Borrar Usuario");
 					
-					Cliente cliente_Edita=new Cliente(new Usuario(textDNI.getText()),btnagregarButton,buttoneliminar);
+					Cliente cliente_Edita=new Cliente(new Usuario(textDNI.getText()),btnagregarButton,buttoneliminar,eliminarUser);
 					cliente_Edita.main();
 					
 					frame.setVisible(false);	
