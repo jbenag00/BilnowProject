@@ -187,14 +187,15 @@ public class AccesoBD {
 
 
 	/**
+	 * @param hora 
 	 * 
 	 * 
 	 */
-	public void aniadirCitaBD(java.util.Date cita_Fecha, String id_Mascota) {
+	public void aniadirCitaBD(java.util.Date cita_Fecha, String id_Mascota, String hora) {
 		// TODO Auto-generated method stub
 
 		try {
-			declaracion.executeUpdate("INSERT INTO `cita` (`id_Cita`, `fecha_cita`, `id_Mascota`) VALUES (NULL, '"+new java.sql.Date(cita_Fecha.getTime())+"', '"+id_Mascota+"');");
+			declaracion.executeUpdate("INSERT INTO `cita` (`id_Cita`, `fecha_cita`, `id_Mascota`, `hora_Cita`) VALUES (NULL, '"+new java.sql.Date(cita_Fecha.getTime())+"', '"+id_Mascota+"', '"+hora+"');");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();  
@@ -478,7 +479,7 @@ public class AccesoBD {
 	 * @return
 	 */
 	public boolean existeProductoBD(String id_Producto) {
-		
+
 		boolean esta=true;
 
 		try {
@@ -508,7 +509,7 @@ public class AccesoBD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
@@ -517,14 +518,14 @@ public class AccesoBD {
 	 * @param id_Prod
 	 */
 	public void eliminarProductoBD(String id_Prod) {
-		
+
 		try {
 			declaracion.execute("DELETE FROM `productos` WHERE `id_Producto` = '"+id_Prod+"';");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
@@ -536,19 +537,44 @@ public class AccesoBD {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 
 	public void eliminarUsuarioBD(String dni_usuario) {
-		
+
 		try {
 			declaracion.execute("DELETE FROM `usuario` WHERE`id_Usuario` = '"+dni_usuario+"';");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+
+
+	public boolean estaLibreHora(Date cita_Fecha, String hora) {
+
+		boolean esta=false;
+
+		try {
+			datos=declaracion.executeQuery("Select * from `cita` where `fecha_cita` = '"+new java.sql.Date(cita_Fecha.getTime())+"' and `hora_Cita` = '"+hora+"';");
+
+			if(datos.next()==false) {
+				esta=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return esta;
+	}
+
+
+	public ResultSet getMascota(String id_Mascota) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

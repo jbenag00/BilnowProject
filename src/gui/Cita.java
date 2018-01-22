@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -48,6 +49,10 @@ public class Cita {
 	
 	private control.Cita control_cita=null;
 	
+	private JPanel panel__Horas;
+	
+	private Date cita_Fecha;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -67,7 +72,7 @@ public class Cita {
 					Cita window = new Cita();
 					frame.setVisible(true);			
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-
+					frame.getContentPane().setBackground(Color.WHITE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -89,16 +94,28 @@ public class Cita {
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 928, 645);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JCalendar calendario=new JCalendar();
+		JCalendar calendario=new JCalendar();	
+		calendario.getDayChooser().addPropertyChangeListener(
+	                new java.beans.PropertyChangeListener() {
+	 
+	                    @Override
+	                    public void propertyChange(java.beans.PropertyChangeEvent evt) {
+	                        if (evt.getPropertyName().compareTo("day") == 0) {
+	                        	 
+	                             cita_Fecha=calendario.getDate();
+	                             pintar_Horas();
+	                        }
+	                    }
+	                });
 		calendario.setBounds(461, 67, 420, 250);
 		frame.getContentPane().add(calendario);
 		
 		JLabel lblInformacinMascota = new JLabel("Informaci\u00F3n Mascota");
 		lblInformacinMascota.setBounds(24, 26, 384, 26);
 		frame.getContentPane().add(lblInformacinMascota);
+		cita_Fecha=new Date();
 		
 		/**
 		 * 
@@ -113,15 +130,13 @@ public class Cita {
 				
 				int fecha = calendario.getCalendar().get(java.util.Calendar.DATE);
 				
-				Date cita_Fecha=new Date();
 				cita_Fecha.setDate(fecha);
-				cita_Fecha.setHours(Integer.parseInt(hora.substring(0, 2)));
-				cita_Fecha.setMinutes(Integer.parseInt(hora.substring(3,5)));
 							
 				//variables para la consulta prepararlas
 				
-				control_cita.aniadirCita(cita_Fecha);
+				control_cita.aniadirCita(cita_Fecha,hora);
 					
+				frame.setVisible(false);
 			}
 		});
 		
@@ -135,7 +150,7 @@ public class Cita {
 		scrollPane.setBounds(461, 366, 420, 132);
 		frame.getContentPane().add(scrollPane);
 		
-		JPanel panel__Horas = new JPanel();
+		panel__Horas = new JPanel();
 		scrollPane.setViewportView(panel__Horas);
 		
 		panel__Horas.setPreferredSize(new Dimension(418,horarios.length*31));
@@ -154,6 +169,11 @@ public class Cita {
 			
 		}
 		
+		pintar_Horas();
+	
+	}
+
+	public void pintar_Horas() {
 		int pos_Lab=0;
 		boolean hora_Libre=true;
 		for (int i = 0; i < horarios.length; i++) {
@@ -183,19 +203,19 @@ public class Cita {
 				
 			});
 			
-			//control
-			if(horarios[i]=="13:00") {
-				hora_Libre=false;
-			}
 			
+			control.Cita control2=new control.Cita(null);
+			hora_Libre=control2.estaLibre(horarios[i],cita_Fecha);
 			if(hora_Libre==true) {
 				panel_1.setBackground(Color.GREEN);
 			}
 			else {
 				panel_1.setBackground(Color.RED);
 			}
-			hora_Libre=true;
+
 			pos_Lab+=31;
 		}
 	}
+
 }
+

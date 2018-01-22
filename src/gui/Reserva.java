@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -58,6 +59,8 @@ public class Reserva {
 				try {
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -93,8 +96,8 @@ public class Reserva {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1046, 646);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground(Color.WHITE);
 
 		JLabel lblCarritoDeLa = new JLabel("Carrito de la compra");
 		lblCarritoDeLa.setBounds(769, 35, 153, 14);
@@ -167,21 +170,27 @@ public class Reserva {
 			lblFabricante.setBounds(30, 64, 80, 14);
 			panel_2.add(lblFabricante);
 
-			JLabel lblPrecio = new JLabel(" precio");
+			JLabel lblPrecio = new JLabel("precio");
 			lblPrecio.setBounds(30, 101, 46, 14);
 			panel_2.add(lblPrecio);		
 
+			
 			if(btnEliminar!=null) {
-				btnEliminar.addActionListener(new ActionListener() {
+				
+				JButton btnElim_1=new JButton("-");
+				btnElim_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						AccesoBD consulta=new AccesoBD();
 						consulta.eliminarProductoBD(lblNomprod.getText());
 						
+						frame.repaint();
+						
 					}
 				});
-				btnEliminar.setBounds(10, 166, 65, 23);
-				panel_1.add(btnEliminar);
+				btnElim_1.setBounds(30, 166, 65, 23);
+				panel_2.add(btnElim_1);
+				
 			}
 			
 			JButton btnAdd = new JButton("ADD");
@@ -262,8 +271,11 @@ public class Reserva {
 		// TODO Auto-generated method stub
 		
 		panel = new JPanel();
+		
+
 		scrollPane_1.setViewportView(panel);
 		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
 
 		panel.setPreferredSize(new Dimension(359, 68*carro_compra.getTamanio()));
 		
@@ -274,6 +286,8 @@ public class Reserva {
 			Producto actual=carro_compra.getProd(i);
 
 			JPanel panel_3 = new JPanel();
+			panel_3.setBackground(Color.WHITE);
+
 			panel_3.setBounds(0, pos, 359, 68);
 			panel.add(panel_3);
 			panel_3.setLayout(null);

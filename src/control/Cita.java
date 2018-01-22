@@ -100,13 +100,14 @@ public class Cita {
 	}
 	
 	/**
+	 * @param hora 
 	 * 
 	 * 
 	 */
-	public void aniadirCita(java.util.Date cita_Fecha) {
+	public void aniadirCita(java.util.Date cita_Fecha, String hora) {
 		// TODO Auto-generated method stub
 
-		consulta.aniadirCitaBD(cita_Fecha, this.getId_Mascota());
+		consulta.aniadirCitaBD(cita_Fecha, this.getId_Mascota(),hora);
 
 	}
 
@@ -137,7 +138,6 @@ public class Cita {
 
 					Cita cita_nueva=new Cita(this.getId_Mascota());
 					cita_nueva.setId_Cita(datos.getLong(1));
-					System.out.println(datos.getString(2));
 					cita_nueva.setFecha_Cita(datos.getString(2));
 					cita_nueva.setId_Mascota(datos.getString(3));
 
@@ -174,6 +174,12 @@ public class Cita {
 
 		return num_Citas;
 		
+	}
+
+	public boolean estaLibre(String hora, Date cita_Fecha) {
+		
+		return consulta.estaLibreHora(cita_Fecha,hora);
+			
 	}
 
 	

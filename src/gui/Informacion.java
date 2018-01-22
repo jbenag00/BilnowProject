@@ -21,7 +21,26 @@ public class Informacion {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	private final String Administrador="En esta ventana tenemos varias opciones:\n"
+			+ "Pestaña Inicio:\n -Añadir Cliente: Abre la ventana de añadir cliente \n -Añadir Producto:Abre la ventana del catalogo con opciones de administrador. \n -Salir: Cierra la ventana,\n"
+			+ "Pestaña Opciones Admin:\n -Backup: Hace una copia de seguridad de la base de datos actualizada.\n"
+			+ "También se brinda una la oportunidad de buscar un cliente\n para poder ver sus datos y realizar alguna\n operación sobre el mismo.";
+	private final String aniadirCliente="Rellenar datos del cliente identificando si es Administrador o no.\n Se puede consultar si el DNI ya existe.";
+	private final String aniadirMascota="Rellenar datos de la mascota del cliente.";
+	private final String aniadirProducto="Rellenar datos del producto a añadir a la base de datos.";;
+	private final String cliente="Muesta la información personal del cliente.\n"
+			+ "Tambien muestra las mascotas que tiene asociadas\n"
+			+ "el cliente, puediendo ver sus citas si las hubiere.\n\n"
+			+ "El botón catálogo muestra los productos que pueden\n"
+			+ "ser reservados para poder ir a la tienda y que los\n"
+			+ "tengan preparados.";
+	private final String MainBilnow="Ventana de autenticación\n Inserta nombre de usuario y contraseña.";
+	private final String Mascota="Muestra información sobre la mascota.";
+	private final String Reserva="Lista de productos que pueden ser reservados.\n"
+			+ "Entrando como administrador también nos brindara las opciones de \n"
+			+ "añadir un producto o eliminarlo del catalogo mostrado.";;
+			
+	private String origen;
 	/**
 	 * Launch the application.
 	 */
@@ -29,7 +48,7 @@ public class Informacion {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Informacion window = new Informacion();
+					Informacion window = new Informacion(null);
 					window.frame.setVisible(true);
 					window.frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 				} catch (Exception e) {
@@ -41,8 +60,10 @@ public class Informacion {
 
 	/**
 	 * Create the application.
+	 * @param string 
 	 */
-	public Informacion() {
+	public Informacion(String string) {
+		origen=string;
 		initialize();
 	}
 
@@ -66,6 +87,10 @@ public class Informacion {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
+		if(origen=="Cliente") {
+			textField.setText(cliente);
+		}
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);

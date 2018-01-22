@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Frame;
 
@@ -75,6 +76,7 @@ public class Administrador {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 371, 354);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frame.getContentPane().setBackground(Color.WHITE);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 642, 449);
@@ -118,6 +120,16 @@ public class Administrador {
 			}
 		});
 		mnInicio.add(mntmAadirProducto);
+		
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				frame.setVisible(false);
+			
+			}
+		});
+		mnInicio.add(mntmSalir);
 		
 		JMenu mnOpcionesAdmin = new JMenu("Opciones Admin");
 		menuBar.add(mnOpcionesAdmin);

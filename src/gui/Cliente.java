@@ -89,6 +89,8 @@ public class Cliente {
 		
 		mascota_Control=new Mascota();
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
+
 		frame.setBounds(100, 100, 830, 562);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -99,6 +101,7 @@ public class Cliente {
 				
 				Cita nueva=new Cita();
 				nueva.main(cliente.getMascota(pos_Mascota),null);	
+				frame.repaint();
 			}
 		});
 		btnPedirCita.setBounds(659, 459, 134, 39);
@@ -156,7 +159,7 @@ public class Cliente {
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		panel.setLayout(null);
-		
+		panel.setBackground(Color.WHITE);
 		JButton btnCatalogo = new JButton("Cat\u00E1logo");
 		btnCatalogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,7 +177,7 @@ public class Cliente {
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Informacion info_ventana=new Informacion();
+				Informacion info_ventana=new Informacion("Cliente");
 				info_ventana.main(null);
 				
 			}
@@ -199,8 +202,7 @@ public class Cliente {
 			eliminar_Usuario.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					AccesoBD consulta=new AccesoBD();
-					consulta.eliminarUsuarioBD(cliente.getDni_usuario());
+					cliente.eliminar_Usuario(cliente.getDni_usuario());
 					frame.setVisible(false);
 					
 				}
@@ -221,13 +223,9 @@ public class Cliente {
 			
 			eliminar_Masc.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
-					AccesoBD consulta=new AccesoBD();
-					
-					consulta.eliminarMascotaBD(cliente.getMascota(pos_Mascota).getDni_Mascota());
-					
-					consulta.eliminarCitaMascotaBD(cliente.getMascota(pos_Mascota).getDni_Mascota());
-					
+										
+					mascota_Control.eliminar_Mascota(cliente.getMascota(pos_Mascota).getDni_Mascota());
+										
 				}
 			});
 			eliminar_Masc.setBounds(741, 133, 46, 39);
@@ -259,12 +257,19 @@ public class Cliente {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Informacion info_ventana=new Informacion();
+				Informacion info_ventana=new Informacion("Cliente");
 				Informacion.main(null);
 				
 			}
 		});
 		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				frame.setVisible(false);
+			
+			}
+		});
 		menu.add(mntmSalir);
 		
 				
@@ -276,7 +281,7 @@ public class Cliente {
 			
 			control.Cita control_Cita=new control.Cita(actual.getDni_Mascota());
 			JPanel panel_Mascota = new JPanel();
-			panel_Mascota.setForeground(Color.YELLOW);
+			panel_Mascota.setBackground(Color.WHITE);
 			panel_Mascota.setBounds(0, pos, 751, 41);
 			panel_Mascota.addMouseListener(new MouseAdapter() {
 				@Override

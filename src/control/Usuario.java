@@ -217,5 +217,19 @@ public class Usuario {
 
 	}
 
+	public void aniadir_Usuario(String dni, String nom, String ap, String tlf, String pswd, String correo,
+			String dir, int rol) {
+
+		
+		AccesoBD consulta2=new AccesoBD();
+		consulta2.aniadir_UsuarioBD(dni, nom, ap, tlf, pswd, correo, dir, rol);
+		
+	}
+
+	public void eliminar_Usuario(String dni_usuario) {
+
+		consulta.eliminarUsuarioBD(dni_usuario);
+	}
+
 
 }

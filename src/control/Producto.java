@@ -148,12 +148,6 @@ public class Producto {
 				n_Producto.setPrecio(datos.getInt(5));
 				
 				productos_Almacen.add(n_Producto);
-				productos_Almacen.add(n_Producto);
-				productos_Almacen.add(n_Producto);
-				productos_Almacen.add(n_Producto);
-				productos_Almacen.add(n_Producto);
-				productos_Almacen.add(n_Producto);
-				productos_Almacen.add(n_Producto);
 
 			}
 

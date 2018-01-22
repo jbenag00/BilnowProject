@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -20,6 +21,8 @@ import control.AccesoBD;
 import control.Usuario;
 
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class Aniadirmascota extends JFrame {
@@ -34,7 +37,7 @@ public class Aniadirmascota extends JFrame {
 	private JTextField textDNIDuenio;
 	private JTextField textCapa;
 	private AccesoBD consulta;
-
+	private control.Mascota mascota;
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +48,7 @@ public class Aniadirmascota extends JFrame {
 					frame = new Aniadirmascota(id_Duenio);
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,6 +69,7 @@ public class Aniadirmascota extends JFrame {
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
@@ -171,7 +175,7 @@ public class Aniadirmascota extends JFrame {
 						sexo=1;
 					}
 					
-					consulta.aniadir_MascotaBD(textFieldDNIMascota.getText(),textNombre.getText(),textEspecie.getText(),textRaza.getText(),textCapa.getText(),elegir_Fecha.getDate(),sexo,textDNIDuenio.getText());
+					mascota.aniadir_Mascota(textFieldDNIMascota.getText(),textNombre.getText(),textEspecie.getText(),textRaza.getText(),textCapa.getText(),elegir_Fecha.getDate(),sexo,textDNIDuenio.getText());
 				
 					frame.setVisible(false);
 					
@@ -183,10 +187,32 @@ public class Aniadirmascota extends JFrame {
 		panel.add(btnAniadir);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			frame.setVisible(false);
+			
+			}
+		});
 		btnCancelar.setBounds(353, 343, 89, 23);
 		panel.add(btnCancelar);
 		
 		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String id_Mascota=textFieldDNIMascota.getText();
+				
+				AccesoBD consulta=new AccesoBD();
+				
+				if(consulta.existeMascotaBD(id_Mascota)) {
+					textFieldDNIMascota.setBackground(Color.RED);
+				}
+				else {
+					textFieldDNIMascota.setBackground(Color.GREEN);
+				}
+			}
+		});
 		btnConsultar.setBounds(324, 76, 110, 23);
 		panel.add(btnConsultar);
 	}

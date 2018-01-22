@@ -210,4 +210,18 @@ public class Mascota {
 		return num_Mascotas;
 	}
 
+	public void aniadir_Mascota(String dni, String nom, String espec, String raz, String capa,
+			java.util.Date date, int sexo, String id_duenio) {
+		
+			declaracion.aniadir_MascotaBD(dni, nom, espec, raz, capa, date, sexo, id_duenio);
+		
+	}
+
+	public void eliminar_Mascota(String dni_Mascota2) {
+		
+		declaracion.eliminarCitaMascotaBD(dni_Mascota2);
+		declaracion.eliminarMascotaBD(dni_Mascota2);
+		
+	}
+
 }
