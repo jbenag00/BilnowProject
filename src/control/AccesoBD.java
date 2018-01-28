@@ -417,11 +417,12 @@ public class AccesoBD {
 	 * @param sexo
 	 * @param id_Duenio
 	 */
-	public void aniadir_MascotaBD(String id, String nom, String esp, String raza, String capa, Date fecha, int sexo, String id_Duenio) {
+	public void aniadir_MascotaBD(Mascota mascota_nueva) {
 		// TODO Auto-generated method stub
 		try {
 			declaracion.execute("INSERT INTO `mascota` (`id_Mascota`, `nombre_Mascota`, `esp_Mascota`, `raza_Mascota`, `capa_Mascota`, `fecha_Nacimiento`, `sexo_Mascota`, `id_Duenio`) "
-					+ "VALUES ('"+id+"', '"+nom+"', '"+esp+"', '"+raza+"', '"+capa+"', '"+new java.sql.Date(fecha.getTime())+"', '"+sexo+"', '"+id_Duenio+"');");
+					+ "VALUES ('"+mascota_nueva.getDni_Mascota()+"', '"+mascota_nueva.getNombre()+"', '"+mascota_nueva.getEspecie()+"', '"+mascota_nueva.getRaza()+"', '"+mascota_nueva.getCapa()+"',"
+							+ " '"+new java.sql.Date(mascota_nueva.getFecha_Nacimiento().getTime())+"', '"+mascota_nueva.getSexo()+"', '"+mascota_nueva.getDniDuenio()+"');");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

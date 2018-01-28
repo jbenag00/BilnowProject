@@ -22,7 +22,11 @@ import control.Usuario;
 
 import java.awt.Font;
 import javax.swing.JTextField;
-
+/*
+ * añadir mascota
+ * eliminar mascota
+ * haer reserva
+ */
 public class MainBilnow extends JFrame {
 
 	private JPanel contentPane;

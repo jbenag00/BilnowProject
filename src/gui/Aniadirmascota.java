@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import control.AccesoBD;
+import control.Mascota;
 import control.Usuario;
 
 import java.awt.event.ActionListener;
@@ -61,6 +62,7 @@ public class Aniadirmascota extends JFrame {
 	 * @param string 
 	 */
 	public Aniadirmascota(String id_Duenio) {
+		mascota=new Mascota();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 499, 439);
 		contentPane = new JPanel();
@@ -166,8 +168,6 @@ public class Aniadirmascota extends JFrame {
 					
 				}
 				else {
-
-					consulta=new AccesoBD();
 					
 					int sexo=0;
 					
@@ -175,7 +175,8 @@ public class Aniadirmascota extends JFrame {
 						sexo=1;
 					}
 					
-					mascota.aniadir_Mascota(textFieldDNIMascota.getText(),textNombre.getText(),textEspecie.getText(),textRaza.getText(),textCapa.getText(),elegir_Fecha.getDate(),sexo,textDNIDuenio.getText());
+					Mascota nueva=new Mascota(textFieldDNIMascota.getText(),textNombre.getText(),textEspecie.getText(),textRaza.getText(),textCapa.getText(),elegir_Fecha.getDate(),sexo,textDNIDuenio.getText());
+					mascota.aniadir_Mascota(nueva);
 				
 					frame.setVisible(false);
 					

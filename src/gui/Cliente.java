@@ -219,7 +219,7 @@ public class Cliente {
 				}
 			});
 			aniadir_Masc.setBounds(677, 133, 46, 39);
-			frame.getContentPane().add(aniadir_Masc);
+			frame.getContentPane().add(aniadir_Masc).repaint();
 			
 			eliminar_Masc.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -230,6 +230,7 @@ public class Cliente {
 			});
 			eliminar_Masc.setBounds(741, 133, 46, 39);
 			frame.getContentPane().add(eliminar_Masc);
+			
 		}
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -306,7 +307,7 @@ public class Cliente {
 			panel_Mascota.setLayout(null);
 			
 			JLabel nom_Mascota = new JLabel("New label");
-			nom_Mascota.setBounds(33, 11, 46, 14);
+			nom_Mascota.setBounds(33, 11, 100, 14);
 			panel_Mascota.add(nom_Mascota);
 			
 			nom_Mascota.setText(actual.getDni_Mascota());

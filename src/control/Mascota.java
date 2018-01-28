@@ -28,8 +28,10 @@ public class Mascota {
 	private int sexo;
 
 	private String capa;
+	
+	private String id_Duenio;
 
-	private Date fecha_Nacimiento;
+	private java.util.Date fecha_Nacimiento;
 	
 	private AccesoBD declaracion;
 
@@ -42,7 +44,42 @@ public class Mascota {
 		declaracion=new AccesoBD();
 		
 	}
+	
+	public Mascota(String dni, String nom, String espec, String raz, String capa,
+			java.util.Date date, int sexo, String id_duenio){
 
+		this.setDni_Mascota(dni);
+		this.setNombre(nom);
+		this.setEspecie(espec);
+		this.setRaza(raz);
+		this.setCapa(capa);
+		this.setFecha_Nacimiento(date);
+		this.setSexo(sexo);
+		this.setDniDuenio(id_duenio);
+		
+		
+	}
+
+	/**
+	 * 
+	 * @param id_duenio
+	 */
+	private void setDniDuenio(String id_duenio) {
+		
+		this.id_Duenio=id_duenio;
+		
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getDniDuenio() {
+		
+		return this.id_Duenio;
+		
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -142,16 +179,16 @@ public class Mascota {
 	 * 
 	 * @return
 	 */
-	public Date getFecha_Nacimiento() {
+	public java.util.Date getFecha_Nacimiento() {
 		return fecha_Nacimiento;
 	}
 
 	/**
 	 * 
-	 * @param fecha_Nacimiento
+	 * @param date
 	 */
-	private void setFecha_Nacimiento(Date fecha_Nacimiento) {
-		this.fecha_Nacimiento = fecha_Nacimiento;
+	private void setFecha_Nacimiento(java.util.Date date) {
+		this.fecha_Nacimiento = date;
 	}
 
 	public Mascota[] getMascotasUsuario(Usuario duenio) {
@@ -210,10 +247,9 @@ public class Mascota {
 		return num_Mascotas;
 	}
 
-	public void aniadir_Mascota(String dni, String nom, String espec, String raz, String capa,
-			java.util.Date date, int sexo, String id_duenio) {
+	public void aniadir_Mascota(Mascota mascota) {
 		
-			declaracion.aniadir_MascotaBD(dni, nom, espec, raz, capa, date, sexo, id_duenio);
+			declaracion.aniadir_MascotaBD(mascota);
 		
 	}
 
